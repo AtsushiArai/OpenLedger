@@ -1,0 +1,20 @@
+.table {
+    display: table;
+}
+
+.tr {
+    display: table-row;
+}
+
+.th {
+    display: table-header-group;
+}
+
+.td {
+    display: table-cell;
+}
+
+.td input {
+    border-radius: 3px;
+    border: 2px solid #ddd;
+}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="welcome">
+    <h1 class="title">オープンソースの会計システム</h1>
+    <p class="subtitle">サブタイトルを描く</p>
+    <a href="{% url 'entry' %}" class="btn btn-primary">仕訳入力に進む</a>
+</div>
+{% endblock %}
