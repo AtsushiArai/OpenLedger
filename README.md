@@ -17,7 +17,7 @@ entryページで、仕訳の貸借が横に並ぶように表示させようと
 vscodeのjson整形機能に思わず「おー」と声が出た。
 Gitを入れていたものの add, commit, push していなかったので、これらを実行
 
-> Gitカンペ
->> git add .
->> git commit
->> git push origin main
+* Gitカンペ
+  * git add .
+  * git commit
+  * git push origin main
