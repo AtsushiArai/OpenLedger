@@ -1,0 +1,1530 @@
+[
+    {
+        "model": "journal.account",
+        "pk": 1,
+        "fields": {
+            "account_code": "11101",
+            "account_name": "現金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 2,
+        "fields": {
+            "account_code": "11102",
+            "account_name": "小口現金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 3,
+        "fields": {
+            "account_code": "11110",
+            "account_name": "当座預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 4,
+        "fields": {
+            "account_code": "11101",
+            "account_name": "普通預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 5,
+        "fields": {
+            "account_code": "11111",
+            "account_name": "普通預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 6,
+        "fields": {
+            "account_code": "11112",
+            "account_name": "定期預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 7,
+        "fields": {
+            "account_code": "11113",
+            "account_name": "通知預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 8,
+        "fields": {
+            "account_code": "11114",
+            "account_name": "定期積金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 9,
+        "fields": {
+            "account_code": "11116",
+            "account_name": "郵便貯金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 10,
+        "fields": {
+            "account_code": "11115",
+            "account_name": "別段預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 11,
+        "fields": {
+            "account_code": "11201",
+            "account_name": "受取手形"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 12,
+        "fields": {
+            "account_code": "11211",
+            "account_name": "売掛金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 13,
+        "fields": {
+            "account_code": "11291",
+            "account_name": "貸倒引当金（売掛金）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 14,
+        "fields": {
+            "account_code": "11301",
+            "account_name": "有価証券"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 15,
+        "fields": {
+            "account_code": "11401",
+            "account_name": "商品"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 16,
+        "fields": {
+            "account_code": "11411",
+            "account_name": "製品"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 17,
+        "fields": {
+            "account_code": "11421",
+            "account_name": "半製品"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 18,
+        "fields": {
+            "account_code": "11422",
+            "account_name": "仕掛品"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 19,
+        "fields": {
+            "account_code": "11431",
+            "account_name": "原材料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 20,
+        "fields": {
+            "account_code": "11432",
+            "account_name": "貯蔵品"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 21,
+        "fields": {
+            "account_code": "11441",
+            "account_name": "副産物作業くず"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 22,
+        "fields": {
+            "account_code": "11501",
+            "account_name": "前渡金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 23,
+        "fields": {
+            "account_code": "11502",
+            "account_name": "立替金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 24,
+        "fields": {
+            "account_code": "11503",
+            "account_name": "未収入金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 25,
+        "fields": {
+            "account_code": "11504",
+            "account_name": "仮払金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 26,
+        "fields": {
+            "account_code": "11505",
+            "account_name": "預け金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 27,
+        "fields": {
+            "account_code": "11506",
+            "account_name": "前払費用"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 28,
+        "fields": {
+            "account_code": "11507",
+            "account_name": "未収収益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 29,
+        "fields": {
+            "account_code": "11581",
+            "account_name": "仮払消費税"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 30,
+        "fields": {
+            "account_code": "11591",
+            "account_name": "貸倒引当金（流動その他）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 31,
+        "fields": {
+            "account_code": "12101",
+            "account_name": "建物"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 32,
+        "fields": {
+            "account_code": "12102",
+            "account_name": "建物付属設備"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 33,
+        "fields": {
+            "account_code": "12103",
+            "account_name": "構築物"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 34,
+        "fields": {
+            "account_code": "12104",
+            "account_name": "機械装置"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 35,
+        "fields": {
+            "account_code": "12105",
+            "account_name": "車両運搬具"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 36,
+        "fields": {
+            "account_code": "12106",
+            "account_name": "工具器具備品"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 37,
+        "fields": {
+            "account_code": "12107",
+            "account_name": "一括償却資産"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 38,
+        "fields": {
+            "account_code": "12111",
+            "account_name": "減価償却累計額"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 39,
+        "fields": {
+            "account_code": "12121",
+            "account_name": "土地"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 40,
+        "fields": {
+            "account_code": "12131",
+            "account_name": "建設仮勘定"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 41,
+        "fields": {
+            "account_code": "12201",
+            "account_name": "ソフトウェア"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 42,
+        "fields": {
+            "account_code": "12202",
+            "account_name": "営業権"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 43,
+        "fields": {
+            "account_code": "12203",
+            "account_name": "電話加入権"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 44,
+        "fields": {
+            "account_code": "12204",
+            "account_name": "施設利用権"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 45,
+        "fields": {
+            "account_code": "12205",
+            "account_name": "借地権"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 46,
+        "fields": {
+            "account_code": "12206",
+            "account_name": "のれん"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 47,
+        "fields": {
+            "account_code": "12301",
+            "account_name": "投資有価証券"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 48,
+        "fields": {
+            "account_code": "12302",
+            "account_name": "関係会社株式"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 49,
+        "fields": {
+            "account_code": "12303",
+            "account_name": "出資金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 50,
+        "fields": {
+            "account_code": "12304",
+            "account_name": "関係会社出資金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 51,
+        "fields": {
+            "account_code": "12305",
+            "account_name": "敷金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 52,
+        "fields": {
+            "account_code": "12306",
+            "account_name": "差入保証金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 53,
+        "fields": {
+            "account_code": "12307",
+            "account_name": "長期貸付金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 54,
+        "fields": {
+            "account_code": "12308",
+            "account_name": "長期性預金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 55,
+        "fields": {
+            "account_code": "12309",
+            "account_name": "長期滞留債権"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 56,
+        "fields": {
+            "account_code": "12310",
+            "account_name": "預託金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 57,
+        "fields": {
+            "account_code": "12311",
+            "account_name": "長期前払費用"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 58,
+        "fields": {
+            "account_code": "12312",
+            "account_name": "繰延税金資産"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 59,
+        "fields": {
+            "account_code": "12391",
+            "account_name": "貸倒引当金（固定）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 60,
+        "fields": {
+            "account_code": "13101",
+            "account_name": "創立費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 61,
+        "fields": {
+            "account_code": "13102",
+            "account_name": "開業費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 62,
+        "fields": {
+            "account_code": "13103",
+            "account_name": "開発費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 63,
+        "fields": {
+            "account_code": "21101",
+            "account_name": "支払手形"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 64,
+        "fields": {
+            "account_code": "21102",
+            "account_name": "買掛金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 65,
+        "fields": {
+            "account_code": "21201",
+            "account_name": "短期社債"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 66,
+        "fields": {
+            "account_code": "21202",
+            "account_name": "短期借入金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 67,
+        "fields": {
+            "account_code": "21203",
+            "account_name": "1年内返済予定社債"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 68,
+        "fields": {
+            "account_code": "21204",
+            "account_name": "1年内返済予定長期借入金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 69,
+        "fields": {
+            "account_code": "21205",
+            "account_name": "短期リース債務"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 70,
+        "fields": {
+            "account_code": "21301",
+            "account_name": "設備支払手形"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 71,
+        "fields": {
+            "account_code": "21302",
+            "account_name": "未払金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 72,
+        "fields": {
+            "account_code": "21303",
+            "account_name": "未払配当金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 73,
+        "fields": {
+            "account_code": "21304",
+            "account_name": "未払役員賞与"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 74,
+        "fields": {
+            "account_code": "21305",
+            "account_name": "未払法人税等"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 75,
+        "fields": {
+            "account_code": "21306",
+            "account_name": "未払消費税等"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 76,
+        "fields": {
+            "account_code": "21307",
+            "account_name": "預り金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 77,
+        "fields": {
+            "account_code": "21308",
+            "account_name": "預り保証金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 78,
+        "fields": {
+            "account_code": "21401",
+            "account_name": "賞与引当金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 79,
+        "fields": {
+            "account_code": "21402",
+            "account_name": "役員賞与引当金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 80,
+        "fields": {
+            "account_code": "21501",
+            "account_name": "未払費用"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 81,
+        "fields": {
+            "account_code": "21502",
+            "account_name": "前受金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 82,
+        "fields": {
+            "account_code": "21503",
+            "account_name": "前受収益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 83,
+        "fields": {
+            "account_code": "21504",
+            "account_name": "仮受金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 84,
+        "fields": {
+            "account_code": "21505",
+            "account_name": "割引手形"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 85,
+        "fields": {
+            "account_code": "21506",
+            "account_name": "裏書手形"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 86,
+        "fields": {
+            "account_code": "21591",
+            "account_name": "仮受消費税等"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 87,
+        "fields": {
+            "account_code": "22101",
+            "account_name": "社債"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 88,
+        "fields": {
+            "account_code": "22102",
+            "account_name": "長期借入金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 89,
+        "fields": {
+            "account_code": "22201",
+            "account_name": "退職給付引当金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 90,
+        "fields": {
+            "account_code": "22202",
+            "account_name": "役員退職慰労引当金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 91,
+        "fields": {
+            "account_code": "22301",
+            "account_name": "長期前受金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 92,
+        "fields": {
+            "account_code": "22302",
+            "account_name": "長期前受収益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 93,
+        "fields": {
+            "account_code": "22303",
+            "account_name": "長期仮受金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 94,
+        "fields": {
+            "account_code": "22304",
+            "account_name": "繰延税金負債"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 95,
+        "fields": {
+            "account_code": "31101",
+            "account_name": "資本金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 96,
+        "fields": {
+            "account_code": "31102",
+            "account_name": "新株式申込証拠金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 97,
+        "fields": {
+            "account_code": "31103",
+            "account_name": "資本準備金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 98,
+        "fields": {
+            "account_code": "31104",
+            "account_name": "資本剰余金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 99,
+        "fields": {
+            "account_code": "31105",
+            "account_name": "利益準備金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 100,
+        "fields": {
+            "account_code": "31106",
+            "account_name": "別途積立金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 101,
+        "fields": {
+            "account_code": "31107",
+            "account_name": "繰越利益剰余金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 102,
+        "fields": {
+            "account_code": "31108",
+            "account_name": "自己株式"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 103,
+        "fields": {
+            "account_code": "31109",
+            "account_name": "自己株式申込証拠金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 104,
+        "fields": {
+            "account_code": "32101",
+            "account_name": "その他有価証券評価差額金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 105,
+        "fields": {
+            "account_code": "32102",
+            "account_name": "繰延ヘッジ損益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 106,
+        "fields": {
+            "account_code": "32103",
+            "account_name": "土地再評価差額金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 107,
+        "fields": {
+            "account_code": "33101",
+            "account_name": "新株予約権"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 108,
+        "fields": {
+            "account_code": "41101",
+            "account_name": "売上高"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 109,
+        "fields": {
+            "account_code": "41102",
+            "account_name": "売上値引"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 110,
+        "fields": {
+            "account_code": "41103",
+            "account_name": "売上戻り"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 111,
+        "fields": {
+            "account_code": "42101",
+            "account_name": "役務収益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 112,
+        "fields": {
+            "account_code": "51101",
+            "account_name": "期首商品棚卸高"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 113,
+        "fields": {
+            "account_code": "51102",
+            "account_name": "仕入高"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 114,
+        "fields": {
+            "account_code": "51103",
+            "account_name": "仕入値引"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 115,
+        "fields": {
+            "account_code": "51104",
+            "account_name": "仕入戻し"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 116,
+        "fields": {
+            "account_code": "51105",
+            "account_name": "期末商品棚卸高"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 117,
+        "fields": {
+            "account_code": "51106",
+            "account_name": "他勘定振替高（商品）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 118,
+        "fields": {
+            "account_code": "52101",
+            "account_name": "期首製品棚卸高"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 119,
+        "fields": {
+            "account_code": "52102",
+            "account_name": "当期製品製造原価"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 120,
+        "fields": {
+            "account_code": "52103",
+            "account_name": "期末製品棚卸高"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 121,
+        "fields": {
+            "account_code": "52104",
+            "account_name": "他勘定振替高（製品）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 122,
+        "fields": {
+            "account_code": "61101",
+            "account_name": "役員報酬"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 123,
+        "fields": {
+            "account_code": "61102",
+            "account_name": "役員賞与"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 124,
+        "fields": {
+            "account_code": "61103",
+            "account_name": "給料手当"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 125,
+        "fields": {
+            "account_code": "61104",
+            "account_name": "雑給"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 126,
+        "fields": {
+            "account_code": "61105",
+            "account_name": "賞与"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 127,
+        "fields": {
+            "account_code": "61106",
+            "account_name": "退職金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 128,
+        "fields": {
+            "account_code": "61107",
+            "account_name": "法定福利費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 129,
+        "fields": {
+            "account_code": "61108",
+            "account_name": "退職給付費用"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 130,
+        "fields": {
+            "account_code": "61109",
+            "account_name": "役員賞与引当金繰入額"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 131,
+        "fields": {
+            "account_code": "61110",
+            "account_name": "賞与引当金繰入額"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 132,
+        "fields": {
+            "account_code": "62101",
+            "account_name": "福利厚生費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 133,
+        "fields": {
+            "account_code": "62102",
+            "account_name": "採用教育費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 134,
+        "fields": {
+            "account_code": "62103",
+            "account_name": "外注費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 135,
+        "fields": {
+            "account_code": "62104",
+            "account_name": "荷造運賃"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 136,
+        "fields": {
+            "account_code": "62105",
+            "account_name": "広告宣伝費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 137,
+        "fields": {
+            "account_code": "62106",
+            "account_name": "交際費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 138,
+        "fields": {
+            "account_code": "62107",
+            "account_name": "会議費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 139,
+        "fields": {
+            "account_code": "62108",
+            "account_name": "旅費交通費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 140,
+        "fields": {
+            "account_code": "62109",
+            "account_name": "通信費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 141,
+        "fields": {
+            "account_code": "62110",
+            "account_name": "販売手数料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 142,
+        "fields": {
+            "account_code": "62111",
+            "account_name": "販売促進費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 143,
+        "fields": {
+            "account_code": "62112",
+            "account_name": "消耗品費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 144,
+        "fields": {
+            "account_code": "62113",
+            "account_name": "事務用品費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 145,
+        "fields": {
+            "account_code": "62114",
+            "account_name": "修繕費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 146,
+        "fields": {
+            "account_code": "62115",
+            "account_name": "水道光熱費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 147,
+        "fields": {
+            "account_code": "62116",
+            "account_name": "新聞図書費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 148,
+        "fields": {
+            "account_code": "62117",
+            "account_name": "諸会費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 149,
+        "fields": {
+            "account_code": "62118",
+            "account_name": "支払手数料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 150,
+        "fields": {
+            "account_code": "62119",
+            "account_name": "車両費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 151,
+        "fields": {
+            "account_code": "62120",
+            "account_name": "地代家賃"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 152,
+        "fields": {
+            "account_code": "62121",
+            "account_name": "賃借料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 153,
+        "fields": {
+            "account_code": "62122",
+            "account_name": "リース料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 154,
+        "fields": {
+            "account_code": "62123",
+            "account_name": "保険料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 155,
+        "fields": {
+            "account_code": "62124",
+            "account_name": "租税公課"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 156,
+        "fields": {
+            "account_code": "62125",
+            "account_name": "支払報酬料"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 157,
+        "fields": {
+            "account_code": "62126",
+            "account_name": "寄付金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 158,
+        "fields": {
+            "account_code": "62127",
+            "account_name": "研究開発費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 159,
+        "fields": {
+            "account_code": "62128",
+            "account_name": "減価償却費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 160,
+        "fields": {
+            "account_code": "62129",
+            "account_name": "長期前払費用償却"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 161,
+        "fields": {
+            "account_code": "62130",
+            "account_name": "繰延資産償却"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 162,
+        "fields": {
+            "account_code": "62131",
+            "account_name": "貸倒損失（販管費）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 163,
+        "fields": {
+            "account_code": "62132",
+            "account_name": "貸倒引当金繰入額（販管費）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 164,
+        "fields": {
+            "account_code": "62191",
+            "account_name": "雑費"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 165,
+        "fields": {
+            "account_code": "71101",
+            "account_name": "受取利息"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 166,
+        "fields": {
+            "account_code": "71102",
+            "account_name": "受取配当金"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 167,
+        "fields": {
+            "account_code": "71103",
+            "account_name": "仕入割引"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 168,
+        "fields": {
+            "account_code": "71104",
+            "account_name": "有価証券売却益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 169,
+        "fields": {
+            "account_code": "71105",
+            "account_name": "貸倒引当金戻入額"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 170,
+        "fields": {
+            "account_code": "71191",
+            "account_name": "雑収入"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 171,
+        "fields": {
+            "account_code": "72101",
+            "account_name": "支払利息"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 172,
+        "fields": {
+            "account_code": "72102",
+            "account_name": "手形売却損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 173,
+        "fields": {
+            "account_code": "72103",
+            "account_name": "貸倒損失（営業外）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 174,
+        "fields": {
+            "account_code": "72104",
+            "account_name": "売上割引"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 175,
+        "fields": {
+            "account_code": "72105",
+            "account_name": "有価証券売却損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 176,
+        "fields": {
+            "account_code": "72106",
+            "account_name": "繰延資産償却（営業外）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 177,
+        "fields": {
+            "account_code": "72107",
+            "account_name": "貸倒引当金繰入額（営業外）"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 178,
+        "fields": {
+            "account_code": "72191",
+            "account_name": "雑損失"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 179,
+        "fields": {
+            "account_code": "81101",
+            "account_name": "固定資産売却益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 180,
+        "fields": {
+            "account_code": "81102",
+            "account_name": "投資有価証券売却益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 181,
+        "fields": {
+            "account_code": "81103",
+            "account_name": "前期損益修正益"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 182,
+        "fields": {
+            "account_code": "82101",
+            "account_name": "固定資産売却損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 183,
+        "fields": {
+            "account_code": "82102",
+            "account_name": "固定資産除却損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 184,
+        "fields": {
+            "account_code": "82103",
+            "account_name": "投資有価証券売却損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 185,
+        "fields": {
+            "account_code": "82104",
+            "account_name": "投資有価証券評価損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 186,
+        "fields": {
+            "account_code": "82105",
+            "account_name": "前期損益修正損"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 187,
+        "fields": {
+            "account_code": "82106",
+            "account_name": "減損損失"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 188,
+        "fields": {
+            "account_code": "91101",
+            "account_name": "法人税、住民税及び事業税"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 189,
+        "fields": {
+            "account_code": "91102",
+            "account_name": "過年度法人税等"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 190,
+        "fields": {
+            "account_code": "91103",
+            "account_name": "還付法人税等"
+        }
+    },
+    {
+        "model": "journal.account",
+        "pk": 191,
+        "fields": {
+            "account_code": "91201",
+            "account_name": "法人税等調整額"
+        }
+    }
+]

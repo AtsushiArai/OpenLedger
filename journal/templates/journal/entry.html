@@ -3,93 +3,119 @@
 {% block main %}
 
 <div class="container mt-4">
-<form action="/entry/entry/" method="POST">
+<form action="/entry/" method="POST">
     {% csrf_token %}
     <!-- 借方・貸方　共通 -->
     <div class="table">
-        仕訳番号：<input type="text" name="je-number">
-        <br>
-        年度：<input type="text" name="annual">
-        <br>
-        計上年月日：<input type="text" name="accounting-date">
-        <br>
-        入力年月日：<input type="text" name="entry-date">
-        <br>
-        計上区分：<input type="text" name="enrty-type">
-        <br>
+        <table>
+            <tr>
+                <th>仕訳番号</th>
+                <th>年度</th>
+                <th>計上年月日</th>
+                <th>計上区分</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="je-number"></td>
+                <td><input type="text" name="annual"></td>
+                <td><input type="text" name="accounting-date"></td>
+                <td><input type="text" name="enrty-type"></td>
+            </tr>
+        </table>
     </div>
     <!-- 仕訳：1行目 -->
     <div>
-        <p>仕訳1行目</p>
-        仕訳行番号：<input type="text" name="je-row-number">
-        <br>
+        <h4>仕訳1行目</h4>
+        <input type="hidden" name="je-row-number" value="1">
         <!-- 借方 -->
-        借方勘定科目：<input type="text" name="debit-account">
-        <br>
-        借方補助科目：<input type="text" name="debit-sub-account">
-        <br>
-        借方消費税区分：<input type="text" name="debit-consumptiontax">
-        <br>
-        借方計上部門：<input type="text" name="debit-department">
-        <br>
-        借方金額：<input type="text" name="debit-amount">
-        <br>
-        借方取引先：<input type="text" name="debit-company">
-        <br>
+        <table>
+            <tr>
+                <th>借方勘定科目</th>
+                <th>借方補助科目</th>
+                <th>借方消費税区分</th>
+                <th>借方計上部門</th>
+                <th>借方金額</th>
+                <th>借方取引先</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="debit-account"></td>
+                <td><input type="text" name="debit-sub-account"></td>
+                <td><input type="text" name="debit-consumptiontax"></td>
+                <td><input type="text" name="debit-department"></td>
+                <td><input type="text" name="debit-amount"></td>
+                <td><input type="text" name="debit-company"></td>
+            </tr>
+        </table>
         <!-- 貸方 -->
-        貸方勘定科目：<input type="text" name="credit-account">
-        <br>
-        貸方補助科目：<input type="text" name="credit-sub-account">
-        <br>
-        貸方消費税区分：<input type="text" name="credit-consumptiontax">
-        <br>
-        貸方計上部門<input type="text" name="credit-department">
-        <br>
-        貸方金額：<input type="text" name="credit-amount">
-        <br>
-        貸方取引先：<input type="text" name="credit-company">
-        <br>
+        <table>
+            <tr>
+                <th>貸方勘定科目</th>
+                <th>貸方補助科目</th>
+                <th>貸方消費税区分</th>
+                <th>貸方計上部門</th>
+                <th>貸方金額</th>
+                <th>貸方取引先</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="credit-account"></td>
+                <td><input type="text" name="credit-sub-account"></td>
+                <td><input type="text" name="credit-consumptiontax"></td>
+                <td><input type="text" name="credit-department"></td>
+                <td><input type="text" name="credit-amount"></td>
+                <td><input type="text" name="credit-company"></td>
+            </tr>
+        </table>
         <!-- その他 -->
         摘要：<input type="text" name="description">
-        <br>
     </div>
-
+    <hr>
     <!-- 仕訳：2行目 -->
     <div>
-        <p>仕訳2行目</p>
-        仕訳行番号：<input type="text" name="je-row-number">
-        <br>
+        <h4>仕訳2行目</h4>
+        <input type="hidden" name="je-row-number" value="2">
         <!-- 借方 -->
-        借方勘定科目：<input type="text" name="debit-account">
-        <br>
-        借方補助科目：<input type="text" name="debit-sub-account">
-        <br>
-        借方消費税区分：<input type="text" name="debit-consumptiontax">
-        <br>
-        借方計上部門：<input type="text" name="debit-department">
-        <br>
-        借方金額：<input type="text" name="debit-amount">
-        <br>
-        借方取引先：<input type="text" name="debit-company">
-        <br>
+        <table>
+            <tr>
+                <th>借方勘定科目</th>
+                <th>借方補助科目</th>
+                <th>借方消費税区分</th>
+                <th>借方計上部門</th>
+                <th>借方金額</th>
+                <th>借方取引先</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="debit-account"></td>
+                <td><input type="text" name="debit-sub-account"></td>
+                <td><input type="text" name="debit-consumptiontax"></td>
+                <td><input type="text" name="debit-department"></td>
+                <td><input type="text" name="debit-amount"></td>
+                <td><input type="text" name="debit-company"></td>
+            </tr>
+        </table>
         <!-- 貸方 -->
-        貸方勘定科目：<input type="text" name="credit-account">
-        <br>
-        貸方補助科目：<input type="text" name="credit-sub-account">
-        <br>
-        貸方消費税区分：<input type="text" name="credit-consumptiontax">
-        <br>
-        貸方計上部門<input type="text" name="credit-department">
-        <br>
-        貸方金額：<input type="text" name="credit-amount">
-        <br>
-        貸方取引先：<input type="text" name="credit-company">
-        <br>
+        <table>
+            <tr>
+                <th>貸方勘定科目</th>
+                <th>貸方補助科目</th>
+                <th>貸方消費税区分</th>
+                <th>貸方計上部門</th>
+                <th>貸方金額</th>
+                <th>貸方取引先</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="credit-account"></td>
+                <td><input type="text" name="credit-sub-account"></td>
+                <td><input type="text" name="credit-consumptiontax"></td>
+                <td><input type="text" name="credit-department"></td>
+                <td><input type="text" name="credit-amount"></td>
+                <td><input type="text" name="credit-company"></td>
+            </tr>
+        </table>
         <!-- その他 -->
         摘要：<input type="text" name="description">
         <br>
     </div>
-
+    <hr>
+ 
     <button type="button" onclick="submit();" class="btn btn-primary">仕訳の登録</button>
 </form>
 </div>

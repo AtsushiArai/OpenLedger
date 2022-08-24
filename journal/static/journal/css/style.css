@@ -18,3 +18,20 @@
     border-radius: 3px;
     border: 2px solid #ddd;
 }
+
+.base {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 30vw;
+}
+
+.debit-side {
+    width: 50%;
+}
+
+.credit-side {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}

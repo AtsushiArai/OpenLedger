@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+
+<form action="/entry/" method="POST">
+    {% csrf_token %}
+    <div class="table">
+        <table>
+            <tr>
+                <th>仕訳番号</th>
+                <th>年度</th>
+                <th>計上年月日</th>
+                <th>計上区分</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="je-number"></td>
+                <td><input type="text" name="annual"></td>
+                <td><input type="text" name="accounting-date"></td>
+                <td><input type="text" name="enrty-type"></td>
+            </tr>
+        </table>
+    </div>
+
+    {% csrf_token %}
+
+    <!-- 画面分割表示 -->
+    <div class="base">
+        <div class="debit-side">
+            <iframe src="debit_side" width="100%" height="100%" frameborder="0" name="debit"></iframe>
+        </div>
+        <div class="credit-side">
+            <iframe src="credit_side" width="100%" height="100%" frameborder="0" name="credit"></iframe>
+        </div>
+    </div>
+
+    <button type="button" onclick="submit();" class="btn btn-primary">仕訳の登録</button>
+
+</form>
+
+{% endblock %}

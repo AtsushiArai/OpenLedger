@@ -1,11 +1,22 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils import timezone
+from django.utils.timezone import localtime
 
 from journal.models import Journal
 
 # Create your views here.
+def test(request):
+    return render(request, "journal/test.html")
+
 def index(request):
     return render(request, "journal/index.html")
+
+def debit_side(request):
+    return render(request, "journal/debit_side.html")
+
+def credit_side(request):
+    return render(request, "journal/credit_side.html")
 
 def entry(request, *args, **kwargs):
     if request.method == "GET":
@@ -19,7 +30,7 @@ def entry(request, *args, **kwargs):
         posted_je_row_number = request.POST.getlist("je-row-number")
         posted_annual = str(request.POST['annual'])
         posted_accounting_date = str(request.POST['accounting-date'])
-        posted_entry_date = str(request.POST['entry-date'])
+        posted_entry_date = localtime(timezone.now())
         posted_entry_type = str(request.POST.get('entry-type'))
 
         # 借方

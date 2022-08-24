@@ -32,6 +32,9 @@ class Journal(models.Model):
     # 摘要
     je_description = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.je_number
+
 
 
 # 勘定科目DB
@@ -50,6 +53,8 @@ class Account(models.Model):
     # 勘定科目名
     account_name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.account_code + " " + self.account_name
 
 
 # 補助科目DB
@@ -58,6 +63,9 @@ class SubAccount(models.Model):
     subaccount_code = models.CharField(max_length=5)
     # 補助科目名
     subaccount_name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.subaccount_code + " " + self.subaccount_name
 
 
 
@@ -68,6 +76,8 @@ class Companies(models.Model):
     # 得意先名
     campany_name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.campany_code + " " + self.campany_name
 
 
 
@@ -82,6 +92,9 @@ class Users(models.Model):
     # 権限名
     user_authority_name = models.CharField(max_length=5)
 
+    def __str__(self):
+        return self.user_code + " " + self.user_name
+
 
 
 # 部門DB
@@ -90,6 +103,9 @@ class Department(models.Model):
     department_code = models.CharField(max_length=5)
     # 部門名
     department_name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.department_code + " " + self.department_name
 
 
 
@@ -100,6 +116,9 @@ class Annual(models.Model):
     # 年度名
     annual_name = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.annual_code + " " + self.annual_name
+
 
 
 # 貸借区分DB
@@ -108,6 +127,9 @@ class DebitCredit(models.Model):
     debit_credit_code = models.CharField(max_length=1)
     # 貸借名
     debit_credit_name = models.CharField(max_length=2)
+
+    def __str__(self):
+        return self.debit_credit_code + " " + self.debit_credit_name
 
 
 
@@ -118,6 +140,9 @@ class ConsumptionTax(models.Model):
     # 消費税区分名
     consumption_tax_name = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.consumption_tax_code + " " + self.consumption_tax_name
+
 
 
 # 計上区分DB（日常、月次決算、四半期決算、年次決算）
@@ -127,4 +152,6 @@ class JournalType(models.Model):
     # 計上区分名
     journal_type_name = models.CharField(max_length=3)
 
+    def __str__(self):
+        return self.journal_type_code + " " + self.journal_type_name
 
