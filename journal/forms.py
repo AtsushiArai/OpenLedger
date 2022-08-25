@@ -1,21 +1,26 @@
-from socket import fromshare
 from django import forms
 from journal.models import Journal
 
-class JournalEntryForm(forms.ModelForm):
-    class Meta:
-        model = Journal
-        fields = (
-            'je_number',
-            'je_row_number',
-            'je_annual',
-            'je_accounting_date',
-            'je_entry_date',
-            'je_entry_type',
-            'je_account',
-            'je_subaccount',
-            'je_consumptiontax',
-            'je_department',
-            'je_amount',
-            'je_description'
-        )
+import json
+
+def readJson(filename):
+    with open(filename, 'r', encoding="utf-8_sig") as fp:
+        return json.load(fp)
+
+def get_account():
+    # 勘定科目を選択する
+    filepath = './static/journal/data/account.json'
+    all_data = readJson(filepath)
+    accounts = list(all_data.keys())
+    all_accounts = [('------'), ('----勘定科目の選択----')]
+    for account in accounts:
+        all_accounts.append((account, account))
+    return all_accounts
+
+class ChoiceAccountForm(forms.Form):
+    account = forms.ChoiceField(
+        choices = get_account(),
+        required = False,
+        label = '勘定科目',
+        widget = forms.Select(attrs={'class':'form-control', 'id':'id-account'})
+    )

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h1>合計残高試算表</h1>
+
+<div class="container mt-4">
+    <div class="trial-balance">
+        <div class="tr">
+            <div class="td">期首残高</div>
+            <div class="td">借方</div>
+            <div class="td">貸方</div>
+            <div class="td">期末残高</div>    
+        </div>
+        <!-- 勘定科目ごとにTrialBalanceテーブルから各値を取得して表示する -->
+    </div>
+     
+    {% for content in tb %}
+    <p>{{ content }}</p>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

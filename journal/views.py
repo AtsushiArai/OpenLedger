@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-from journal.models import Journal
+from journal.models import Journal, Account
 
 # Create your views here.
 def test(request):
@@ -40,6 +40,7 @@ def entry(request, *args, **kwargs):
         posted_debit_department = request.POST.getlist('debit-department')
         posted_debit_amount = request.POST.getlist('debit-amount')
         posted_debit_company = request.POST.getlist('debit-company')
+        posted_debit_credit = request.POST.getlist('debit-credit')
 
         # 貸方
         posted_credit_account = request.POST.getlist('credit-account')
@@ -48,6 +49,7 @@ def entry(request, *args, **kwargs):
         posted_credit_department = request.POST.getlist('credit-department')
         posted_credit_amount = request.POST.getlist('credit-amount')
         posted_credit_company = request.POST.getlist('credit-company')
+        posted_debit_credit = request.POST.getlist('debit-credit')
 
         # その他
         posted_descreption = request.POST.getlist('description')
@@ -56,7 +58,7 @@ def entry(request, *args, **kwargs):
         print("Debit Account", posted_debit_account)
         print("Credit Account", posted_credit_account)
 
-        for a,b,c,d,e,f,g,h,i,j,k,l,m,n in zip(
+        for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o in zip(
             posted_je_row_number,           #a
             posted_debit_account,           #b
             posted_debit_sub_account,       #c
@@ -70,7 +72,8 @@ def entry(request, *args, **kwargs):
             posted_credit_department,       #k
             posted_credit_amount,           #l
             posted_credit_company,          #m
-            posted_descreption              #n
+            posted_descreption,             #n
+            posted_debit_credit             #o
             ):
 
             if b != "":
@@ -88,6 +91,7 @@ def entry(request, *args, **kwargs):
                     je_amount = int(f),
                     je_company = g,
                     je_description = n,
+                    je_debit_credit = o,
                 )
                 journal_entry_debit.save()
             
@@ -103,11 +107,49 @@ def entry(request, *args, **kwargs):
                     je_subaccount = i,
                     je_consumptiontax = j,
                     je_department = k,
-                    je_amount = -1 * int(l),
+                    je_amount = int(l),
                     je_company = m,
                     je_description = n,
+                    je_debit_credit = o,
                 )
 
                 journal_entry_credit.save()
 
         return render(request, "journal/entry.html")
+
+def trial_balance(request):
+    # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
+    tb = dict()
+    i = Journal.objects.all().count()
+    for pk in range(1, i+1):
+        je = Journal.objects.get(pk=pk)
+        dc = je.je_debit_credit
+        ac = je.je_account
+        am = je.je_amount
+
+        if ac not in tb:
+            if dc == "0":
+                tb[ac] = [am, 0]
+            else:
+                tb[ac] = [0, am]
+        else:
+            if dc == "0":
+                dev_am += tb[ac][0]
+                cre_am = tb[ac][1]
+                tb[ac] = [dev_am, cre_am]
+            else:
+                cre_am += tb[ac][1]
+                dev_am = tb[ac][0]
+                tb[ac] = [dev_am, cre_am]
+    
+    # sorted_tb = sorted(tb.items(), key=lambda x:x[0])
+    # print(sorted_tb)
+    # print(sorted_tb[0])
+    # print(sorted_tb[0][0])
+    # print(sorted_tb[0][1])
+    # print(sorted_tb[0][1][0])
+
+    # 集計結果を出力する。
+    print(tb)
+    
+    return render(request, "journal/trial_balance.html", tb)
