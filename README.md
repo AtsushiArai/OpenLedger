@@ -21,3 +21,12 @@ Gitを入れていたものの add, commit, push していなかったので、�
   * git add .
   * git commit
   * git push origin main
+
+## 2022-08-25
+試算表を表示するページ trial_balance.html を作成しようとして詰まる。
+ * 仕訳テーブルから借方・貸方を集計しようとして、 Journal.objects.all() でデータを取得しようとしたがなぜか仕訳番号しか取得できなかった。仕方なく for ループで Journal.objects.get(pk=pk) として1行ずつ取得した。
+ * 取得したデータ(dict形式)をhtmlで表示させようとしたけど表示されなかった。
+ * 結局「総勘定元帳テーブル」がないと処理しにくい？「仕訳テーブル」と「総勘定元帳テーブル」は内容がかぶるからどちらか一つにしたい（軽量化のため）。
+ * 試算表は view.py の中で完成させたい。どうしたらうまくいくか？
+
+Journalテーブルからviews.pyの trial_balance にデータを引っ張ってきて、 trial_balance の中で仕訳の集計＆期末残高の計算（期首残高どうする？？？）をしたものを trial_balance.html に渡して表示する、みたいなことを実現したい。
