@@ -8,10 +8,18 @@
 
 .th {
     display: table-header-group;
+    text-align: right;
 }
 
 .td {
     display: table-cell;
+    text-align: right;
+    width: 15%;
+}
+
+.td-left {
+    text-align: left;
+    text-indent: 2rem;
 }
 
 .td input {

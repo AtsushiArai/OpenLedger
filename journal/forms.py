@@ -1,26 +1,47 @@
 from django import forms
-from journal.models import Journal
+from journal.models import Account
 
-import json
+accounts_table = [x for x in Account.objects.values()]
+accounts_list = []
+for d in accounts_table:
+    accounts_list.append((d["account_code"],d["account_code"]+" "+d["account_name"]))
 
-def readJson(filename):
-    with open(filename, 'r', encoding="utf-8_sig") as fp:
-        return json.load(fp)
 
-def get_account():
-    # 勘定科目を選択する
-    filepath = './static/journal/data/account.json'
-    all_data = readJson(filepath)
-    accounts = list(all_data.keys())
-    all_accounts = [('------'), ('----勘定科目の選択----')]
-    for account in accounts:
-        all_accounts.append((account, account))
-    return all_accounts
+""" 
+MEMO1:accounts_table の中身
+    accounts_table = [
+        {"id":1, "account_code": "11102", "account_name":"小口現金"},
+        {"id":2, "account_code": "11110", "account_name":"当座預金"},
+        ......
+    ]
 
+MEMO2:
+ChoiceField の choices に渡す値は、(some1, some2) となっていないとダメっぽい。
+
+error -> accounts_list = [code+name, code+name, .....]
+
+success -> accounts_list = [(code, code+name), (code, code+name),....]
+
+
+"""
 class ChoiceAccountForm(forms.Form):
-    account = forms.ChoiceField(
-        choices = get_account(),
-        required = False,
-        label = '勘定科目',
-        widget = forms.Select(attrs={'class':'form-control', 'id':'id-account'})
+    account = forms.fields.ChoiceField(
+        choices=accounts_list,
+        required=True,
     )
+
+class JournalEntryForm(forms.Form):
+    je_number = forms.CharField(required=True)
+    je_row_number = forms.CharField(required=True)
+    je_annual = forms.CharField(required=True)
+    je_accountint_date = forms.DateField(required=True)
+    je_entry_date = forms.DateField(required=True)
+    je_entry_type = forms.CharField(required=True)
+    je_debit_credit = forms.CharField(required=True)
+    je_account = ChoiceAccountForm()
+    je_consumptiontax = forms.CharField()
+    je_department = forms.CharField()
+    je_amount = forms.CharField()
+    je_company = forms.CharField()
+    je_description = forms.CharField()
+    

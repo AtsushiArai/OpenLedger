@@ -1,25 +1,37 @@
 {% extends "base.html" %}
 
+{% load humanize %}
+
 {% block main %}
 
 <h1>合計残高試算表</h1>
 
 <div class="container mt-4">
     <div class="trial-balance">
-        <div class="tr">
-            <div class="td">期首残高</div>
-            <div class="td">借方</div>
-            <div class="td">貸方</div>
-            <div class="td">期末残高</div>    
+        <div class="table">
+            <div class="tr">
+                <div class="td">勘定科目コード</div>
+                <div class="td">勘定科目名</div>
+                <div class="td">期首残高</div>
+                <div class="td">借方</div>
+                <div class="td">貸方</div>
+                <div class="td">期末残高</div>    
+            </div>
+            <!-- 勘定科目ごとにTrialBalanceテーブルから各値を取得して表示する -->
+        
+            {% for tb in trial_balance %}
+            <div class="tr">
+                <div class="td">{{ tb.0 }}</div>
+                <div class="td-left">{{ tb.1 }}</div>
+                <div class="td">{{ tb.2 | intcomma }}</div>
+                <div class="td">{{ tb.3 | intcomma }}</div>
+                <div class="td">{{ tb.4 | intcomma }}</div>
+                <div class="td">{{ tb.5 | intcomma }}</div>
+            </div>
+            {% endfor %}
         </div>
-        <!-- 勘定科目ごとにTrialBalanceテーブルから各値を取得して表示する -->
+
     </div>
-     
-    {% for content in tb %}
-    <p>{{ content }}</p>
-    {% endfor %}
 </div>
-
-
 
 {% endblock %}

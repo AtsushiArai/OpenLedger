@@ -69,27 +69,13 @@ class SubAccount(models.Model):
     def __str__(self):
         return self.subaccount_code + " " + self.subaccount_name
 
+# 期首残高テーブル
+class BeginningBalance(models.Model):
+    # 勘定科目CD
+    account_code = models.CharField('勘定科目コード', max_length=5)
+    # 開始残高
+    beginning_balance = models.IntegerField('開始残高')
 
-# 総勘定元帳テーブル
-class GeneralLedger():
-    pass
-
-
-# 試算表テーブル
-class TrialBalance(Account):
-    def __init__():
-        pass
-
-    def make_trial_balance():
-        # 期首残高
-        beginning_balance = models.IntegerField("期首残高")
-        # 借方金額
-        debit_amount = models.IntegerField("借方金額")
-        # 貸方金額
-        credit_amount = models.IntegerField("貸方金額")
-        # 期末残高
-        ending_balance = models.IntegerField("期末残高")
-    
 
 # 得意先テーブル
 class Companies(models.Model):

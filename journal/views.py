@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-from journal.models import Journal, Account
+from journal.forms import ChoiceAccountForm, JournalEntryForm
+from journal.models import Journal, Account, BeginningBalance
 
 # Create your views here.
 def test(request):
@@ -19,8 +20,14 @@ def credit_side(request):
     return render(request, "journal/credit_side.html")
 
 def entry(request, *args, **kwargs):
+    context = {}
     if request.method == "GET":
-        return render(request, "journal/entry.html")
+        # form = ChoiceAccountForm()
+        # context['form'] = form
+        # return render(request, "journal/entry.html", context)
+        form = JournalEntryForm()
+        context['form'] = form
+        return render(request, 'journal/entry.html', context)
     
     # request.method == "POST"
     else:
@@ -53,10 +60,6 @@ def entry(request, *args, **kwargs):
 
         # その他
         posted_descreption = request.POST.getlist('description')
-
-        print("JE Number", posted_je_number)
-        print("Debit Account", posted_debit_account)
-        print("Credit Account", posted_credit_account)
 
         for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o in zip(
             posted_je_row_number,           #a
@@ -117,39 +120,108 @@ def entry(request, *args, **kwargs):
 
         return render(request, "journal/entry.html")
 
-def trial_balance(request):
+def make_trial_balance(request):
     # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
-    tb = dict()
-    i = Journal.objects.all().count()
+
+    # {勘定科目コード: 勘定科目名} dict 作成
+    account_dict = dict()
+    i = Account.objects.all().count()
+
     for pk in range(1, i+1):
-        je = Journal.objects.get(pk=pk)
-        dc = je.je_debit_credit
-        ac = je.je_account
-        am = je.je_amount
+        try:
+            acc = Account.objects.get(pk=pk)
+            code = acc.account_code
+            name = acc.account_name
+            account_dict[code] = name
+        except:
+            pass
 
-        if ac not in tb:
-            if dc == "0":
-                tb[ac] = [am, 0]
+
+    # [科目コード, 科目名, 期首残高, 借方発生額, 貸方発生額 , 期末残高] list 作成
+    ## 開始残高の取得
+    beginning_balance_dict = dict()
+    i = BeginningBalance.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            bb = BeginningBalance.objects.get(pk=pk)
+            ac = bb.account_code
+            am = bb.beginning_balance
+            beginning_balance_dict[ac] = am
+        except:
+            pass
+
+    # 借方・貸方発生額の取得と集計
+    trial_balance = dict()
+    i = Journal.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            je = Journal.objects.get(pk=pk)
+            dc = je.je_debit_credit
+            ac = je.je_account
+            ac_name = account_dict[ac]
+            am = je.je_amount
+
+            ## 抽出した仕訳の勘定科目が、まだ trial_balance に出てきていない場合
+            if ac not in trial_balance:
+                if dc == "0":
+                    trial_balance[ac] = [am, 0]
+                else:
+                    trial_balance[ac] = [0, am]
+
+            ## 抽出した仕訳の勘定科目が、 trial_balance にある場合
             else:
-                tb[ac] = [0, am]
+                if dc == "0":
+                    dev_am = trial_balance[ac][0] + am
+                    cre_am = trial_balance[ac][1]
+                    trial_balance[ac] = [dev_am, cre_am]
+                else:
+                    cre_am = trial_balance[ac][1] + am
+                    dev_am = trial_balance[ac][0]
+                    trial_balance[ac] = [dev_am, cre_am]
+        except:
+            pass
+    
+    # 勘定科目コード順に sort
+    sorted_trial_balance = sorted(trial_balance.items(), key=lambda x:x[0])
+
+    # sorted_trial_balance を for ループしつつ、以下を行う：
+        # 科目名の追加
+        # 期首残高の追加
+        # 期末残高の追加
+    fixed_trial_balance = []
+
+    for code, dc in sorted_trial_balance:
+        bb = beginning_balance_dict[code]
+        if code[0] == ("1" or "5" or "6" or "9") or code[0:1] == ("72" or "82"):
+            fixed_trial_balance.append([code, account_dict[code], bb, dc[0], dc[1], bb + dc[0] - dc[1]])
+
         else:
-            if dc == "0":
-                dev_am += tb[ac][0]
-                cre_am = tb[ac][1]
-                tb[ac] = [dev_am, cre_am]
-            else:
-                cre_am += tb[ac][1]
-                dev_am = tb[ac][0]
-                tb[ac] = [dev_am, cre_am]
-    
-    # sorted_tb = sorted(tb.items(), key=lambda x:x[0])
-    # print(sorted_tb)
-    # print(sorted_tb[0])
-    # print(sorted_tb[0][0])
-    # print(sorted_tb[0][1])
-    # print(sorted_tb[0][1][0])
+            fixed_trial_balance.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
 
-    # 集計結果を出力する。
-    print(tb)
-    
-    return render(request, "journal/trial_balance.html", tb)
+    # accounts_list = [x for x in Account.objects.all()]
+    # print(accounts_list)
+
+    # all_accounts = Account.objects.all()
+    # accounts_list = []
+    # i = 0
+    # for ac in all_accounts:
+    #     accounts_list.append(ac)
+    #     i += 1
+    #     if i == 5:
+    #         break
+    # print(accounts_list)
+
+
+    # accounts_table = [x for x in Account.objects.values()]
+    # accounts_list = []
+    # for d in accounts_table:
+    #     accounts_list.append(d["account_code"]+" "+d["account_name"])
+
+    # for a in accounts_list:
+    #     print(a)
+    #     break
+
+    # htmlに "trial_balance" として渡す。
+    return render(request, "journal/trial_balance.html", context={"trial_balance":fixed_trial_balance})
