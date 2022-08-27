@@ -37,3 +37,9 @@ Journalテーブルからviews.pyの trial_balance にデータを引っ張っ�
 
 entry.html で、勘定科目をプルダウンリストで選択できるようにしようとして詰まる。
 プルダウンリストは作れたが、その値をどのようにPUSHすれば仕訳テーブルに取り込めるかわからなかった。
+
+
+## 2022-08-27
+django form に入力した値のPUSHの取得だが、
+ <tag name="fuga"> {{ form.form }} </tag>
+ みたいな感じで上手くいかないだろうか？SS
