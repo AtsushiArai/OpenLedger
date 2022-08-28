@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-from journal.forms import ChoiceAccountForm, JournalEntryForm
+# from journal.forms import ChoiceAccountForm, JournalEntryForm
 from journal.models import Journal, Account, BeginningBalance
 
 # Create your views here.
@@ -22,12 +22,13 @@ def credit_side(request):
 def entry(request, *args, **kwargs):
     context = {}
     if request.method == "GET":
+        return render(request, "journal/entry.html")
         # form = ChoiceAccountForm()
         # context['form'] = form
         # return render(request, "journal/entry.html", context)
-        form = JournalEntryForm()
-        context['form'] = form
-        return render(request, 'journal/entry.html', context)
+        # form = JournalEntryForm()
+        # context['form'] = form
+        # return render(request, 'journal/entry.html', context)
     
     # request.method == "POST"
     else:
