@@ -42,4 +42,6 @@ entry.html で、勘定科目をプルダウンリストで選択できるよう
 ## 2022-08-27
 django form に入力した値のPUSHの取得だが、
  <tag name="fuga"> {{ form.form }} </tag>
- みたいな感じで上手くいかないだろうか？SS
+ みたいな感じで上手くいかないだろうか？
+
+ models.py で、数値が入る予定の部分（科目コード等のコード）を、CharFieleからIntegerFieldに変更した。
