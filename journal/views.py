@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-# from journal.forms import ChoiceAccountForm, JournalEntryForm
+from journal.forms import ChoiceAccountForm
 from journal.models import Journal, Account, BeginningBalance
 
 # Create your views here.
@@ -19,13 +19,14 @@ def debit_side(request):
 def credit_side(request):
     return render(request, "journal/credit_side.html")
 
+
 def entry(request, *args, **kwargs):
     context = {}
     if request.method == "GET":
-        return render(request, "journal/entry.html")
-        # form = ChoiceAccountForm()
-        # context['form'] = form
-        # return render(request, "journal/entry.html", context)
+        # return render(request, "journal/entry.html")
+        form = ChoiceAccountForm()
+        context['accounts'] = form
+        return render(request, "journal/entry.html", context)
         # form = JournalEntryForm()
         # context['form'] = form
         # return render(request, 'journal/entry.html', context)
@@ -33,6 +34,12 @@ def entry(request, *args, **kwargs):
     # request.method == "POST"
     else:
 
+        form = ChoiceAccountForm(request.POST)
+        if form.is_valid():
+            context['accounts'] = form
+
+            print("*****account****:", form.cleaned_data['account'])
+        
         # 借方・貸方　共通
         posted_je_number = str(request.POST["je-number"])
         posted_je_row_number = request.POST.getlist("je-row-number")
@@ -42,6 +49,7 @@ def entry(request, *args, **kwargs):
         posted_entry_type = str(request.POST.get('entry-type'))
 
         # 借方
+            # ここを form.cleaned_data['account'] にすれば勘定科目コードをいれられるが、仕訳の貸借＆枝番をどう区別するかわからない。
         posted_debit_account = request.POST.getlist('debit-account')
         posted_debit_sub_account = request.POST.getlist('debit-sub-account')
         posted_debit_consumptiontax = request.POST.getlist('debit-consumptiontax')
@@ -119,7 +127,7 @@ def entry(request, *args, **kwargs):
 
                 journal_entry_credit.save()
 
-        return render(request, "journal/entry.html")
+        return render(request, "journal/entry.html", context)
 
 def make_trial_balance(request):
     # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。

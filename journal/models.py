@@ -35,7 +35,7 @@ class Journal(models.Model):
     je_description = models.CharField('摘要', max_length=100)
 
     def __str__(self):
-        return self.je_number
+        return str(self.je_number)
 
 
 

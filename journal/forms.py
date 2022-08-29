@@ -1,10 +1,10 @@
-# from django import forms
-# from journal.models import Account
+from django import forms
+from journal.models import Account
 
-# accounts_table = [x for x in Account.objects.values()]
-# accounts_list = []
-# for d in accounts_table:
-#     accounts_list.append((d["account_code"],d["account_code"]+" "+d["account_name"]))
+accounts_table = [x for x in Account.objects.values()]
+accounts_list = [("",""),]
+for d in accounts_table:
+    accounts_list.append((str(d["account_code"]),str(d["account_code"])+" "+d["account_name"]))
 
 
 # """ 
@@ -24,11 +24,12 @@
 
 
 # """
-# class ChoiceAccountForm(forms.Form):
-#     account = forms.fields.ChoiceField(
-#         choices=accounts_list,
-#         required=True,
-#     )
+class ChoiceAccountForm(forms.Form):
+    account = forms.fields.ChoiceField(
+        choices=accounts_list,
+        required=True,
+        widget=forms.widgets.Select,
+    )
 
 # class JournalEntryForm(forms.Form):
 #     je_number = forms.CharField(required=True)
