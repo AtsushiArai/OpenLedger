@@ -8,7 +8,10 @@ from journal.models import Journal, Account, BeginningBalance
 
 # Create your views here.
 def test(request):
-    return render(request, "journal/test.html")
+    context = {}
+    form = ChoiceAccountForm()
+    context['accounts'] = form
+    return render(request, "journal/test2.html", context)
 
 def index(request):
     return render(request, "journal/index.html")
@@ -22,24 +25,15 @@ def credit_side(request):
 
 def entry(request, *args, **kwargs):
     context = {}
+    form = ChoiceAccountForm()
+    context['accounts'] = form
+
     if request.method == "GET":
-        # return render(request, "journal/entry.html")
-        form = ChoiceAccountForm()
-        context['accounts'] = form
         return render(request, "journal/entry.html", context)
-        # form = JournalEntryForm()
-        # context['form'] = form
-        # return render(request, 'journal/entry.html', context)
     
     # request.method == "POST"
     else:
 
-        form = ChoiceAccountForm(request.POST)
-        if form.is_valid():
-            context['accounts'] = form
-
-            print("*****account****:", form.cleaned_data['account'])
-        
         # 借方・貸方　共通
         posted_je_number = str(request.POST["je-number"])
         posted_je_row_number = request.POST.getlist("je-row-number")
@@ -49,28 +43,28 @@ def entry(request, *args, **kwargs):
         posted_entry_type = str(request.POST.get('entry-type'))
 
         # 借方
-            # ここを form.cleaned_data['account'] にすれば勘定科目コードをいれられるが、仕訳の貸借＆枝番をどう区別するかわからない。
-        posted_debit_account = request.POST.getlist('debit-account')
+        posted_debit_account = request.POST.getlist('account')[0::2]                # プルダウンリストで選択された値が "account" として借方・貸方とも渡される。リストにまとめられたうち、indexの偶数番目が借方、奇数番目が貸方になる。 
         posted_debit_sub_account = request.POST.getlist('debit-sub-account')
         posted_debit_consumptiontax = request.POST.getlist('debit-consumptiontax')
         posted_debit_department = request.POST.getlist('debit-department')
         posted_debit_amount = request.POST.getlist('debit-amount')
         posted_debit_company = request.POST.getlist('debit-company')
-        posted_debit_credit = request.POST.getlist('debit-credit')
+        posted_debit_side = request.POST.getlist('debit-credit')[0::2]
+
 
         # 貸方
-        posted_credit_account = request.POST.getlist('credit-account')
+        posted_credit_account = request.POST.getlist('account')[1::2]
         posted_credit_sub_account = request.POST.getlist('credit-sub-account')
         posted_credit_consumptiontax = request.POST.getlist('credit-consumptiontax')
         posted_credit_department = request.POST.getlist('credit-department')
         posted_credit_amount = request.POST.getlist('credit-amount')
         posted_credit_company = request.POST.getlist('credit-company')
-        posted_debit_credit = request.POST.getlist('debit-credit')
+        posted_credit_side = request.POST.getlist('debit-credit')[1::2]
 
         # その他
         posted_descreption = request.POST.getlist('description')
 
-        for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o in zip(
+        for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p in zip(
             posted_je_row_number,           #a
             posted_debit_account,           #b
             posted_debit_sub_account,       #c
@@ -85,7 +79,8 @@ def entry(request, *args, **kwargs):
             posted_credit_amount,           #l
             posted_credit_company,          #m
             posted_descreption,             #n
-            posted_debit_credit             #o
+            posted_debit_side,              #o
+            posted_credit_side              #p
             ):
 
             if b != "":
@@ -122,7 +117,7 @@ def entry(request, *args, **kwargs):
                     je_amount = int(l),
                     je_company = m,
                     je_description = n,
-                    je_debit_credit = o,
+                    je_debit_credit = p,
                 )
 
                 journal_entry_credit.save()

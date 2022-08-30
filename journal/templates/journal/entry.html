@@ -4,7 +4,7 @@
 
 
 <div class="container mt-4">
-<form action="/entry/" method="POST">
+<form action="/entry/" method="POST"  onsubmit="return checkAmount()">
     {% csrf_token %}
     <!-- 借方・貸方　共通 -->
     <div class="table">
@@ -43,7 +43,7 @@
                 <td><input type="text" name="debit-sub-account"></td>
                 <td><input type="text" name="debit-consumptiontax"></td>
                 <td><input type="text" name="debit-department"></td>
-                <td><input type="text" name="debit-amount"></td>
+                <td><input type="text" name="debit-amount" id="je1-debit"></td>
                 <td><input type="text" name="debit-company"></td>
                 <input type="hidden" name="debit-credit" value="0">
             </tr>
@@ -63,7 +63,7 @@
                 <td><input type="text" name="credit-sub-account"></td>
                 <td><input type="text" name="credit-consumptiontax"></td>
                 <td><input type="text" name="credit-department"></td>
-                <td><input type="text" name="credit-amount"></td>
+                <td><input type="text" name="credit-amount" id="je1-credit"></td>
                 <td><input type="text" name="credit-company"></td>
                 <input type="hidden" name="debit-credit" value="1">
             </tr>
@@ -91,7 +91,7 @@
                 <td><input type="text" name="debit-sub-account"></td>
                 <td><input type="text" name="debit-consumptiontax"></td>
                 <td><input type="text" name="debit-department"></td>
-                <td><input type="text" name="debit-amount"></td>
+                <td><input type="text" name="debit-amount" id="je2-debit"></td>
                 <td><input type="text" name="debit-company"></td>
                 <input type="hidden" name="debit-credit" value="0">
             </tr>
@@ -111,7 +111,7 @@
                 <td><input type="text" name="credit-sub-account"></td>
                 <td><input type="text" name="credit-consumptiontax"></td>
                 <td><input type="text" name="credit-department"></td>
-                <td><input type="text" name="credit-amount"></td>
+                <td><input type="text" name="credit-amount" id="je2-credit"></td>
                 <td><input type="text" name="credit-company"></td>
                 <input type="hidden" name="debit-credit" value="1">
             </tr>
@@ -122,16 +122,11 @@
     {% endfor %}
     </div>
     <hr>
- 
-    <button type="button" onclick="submit();" class="btn btn-primary">仕訳の登録</button>
+    <input type="hidden" name="debit-account" value="">
+    <input type="hidden" name="credit-account" value="">
+
+    <button type="button" id="submit" class="btn btn-primary">仕訳の登録</button>
 </form>
 </div>
-
-<hr>
-{% for account in accounts %}
-
-{{ account }}
-
-{% endfor %}
 
 {% endblock %}

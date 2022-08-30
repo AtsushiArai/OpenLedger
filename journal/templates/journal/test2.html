@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block main %}
+<p>選択した勘定科目1 <span id="span1"></span></p>
+<br>
+<p>選択した勘定科目2 <span id="span2"></span></p>
+
+<form method="post" name="form1">
+    {% csrf_token %}
+        {% csrf_token %}
+        {% for account1 in accounts %}
+        {{ account1 }}
+
+        {{ account1 }}
+        {% endfor %}
+
+
+
+    <!-- <div>
+        <input type="text" value="1" id="fuga">
+    </div> -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var elem = document.getElementById('select_box');
+            var result = elem.value;
+            console.log(result);
+        }, false);
+    </script> -->
+
+    <!-- <script>
+        function clickBtn1(){
+
+            const accountSelected = document.form1.account1.account;
+
+            const num = accountSelected.selectedIndex;
+
+            const str = accountSelected.options[num].value;
+
+            document.getElementById("span1").textContent = str;
+        }
+    </script> -->
+
+
+
+    <button type="submit" onclick="clickBtn1()">登録</button>
+</form>
+<!-- {% endblock %} -->

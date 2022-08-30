@@ -54,3 +54,17 @@ django form に入力した値のPUSHの取得だが、
 
  * プルダウンリストで表示した値を value に入れる方法を見つける。もしくはほかの方法を考える。
  * 複数のユーザー（利用者）がいる場合に、DBは各ユーザーごとに作ることになるのか？一般的なSNSの事例からユーザーとDBの関係を理解する。
+
+ ## 2022-08-30
+ ### 勘定科目のプルダウンリストの要素
+ {% for account in accounts %}
+  {{ account }}
+{% endfor %}
+↓
+<select name="account" required id="id_accont">
+<option value="11102">11102 小口現金</option>
+
+選択された値は、"account" としてFormから送信されている。
+<input>タグの name="debit-account" name="credit-account" は無視されている。
+
+借方・貸方金額の一致チェックを javascript で行うことは成功したが、一致している場合にsubmit処理をすることができなかった。 if alert else submit をできるようにする。
