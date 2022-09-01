@@ -257,31 +257,182 @@ def make_trial_balance(request):
         else:
             fixed_trial_balance.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
 
-    # accounts_list = [x for x in Account.objects.all()]
-    # print(accounts_list)
 
-    # all_accounts = Account.objects.all()
-    # accounts_list = []
-    # i = 0
-    # for ac in all_accounts:
-    #     accounts_list.append(ac)
-    #     i += 1
-    #     if i == 5:
-    #         break
-    # print(accounts_list)
-
-
-    # accounts_table = [x for x in Account.objects.values()]
-    # accounts_list = []
-    # for d in accounts_table:
-    #     accounts_list.append(d["account_code"]+" "+d["account_name"])
-
-    # for a in accounts_list:
-    #     print(a)
-    #     break
-
-    # htmlに "trial_balance" として渡す。
     return render(request, "journal/trial_balance.html", context={"trial_balance":fixed_trial_balance})
+
+
+def make_balance_sheet(request):
+    # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
+
+    # {勘定科目コード: 勘定科目名} dict 作成
+    account_dict = dict()
+    i = Account.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            acc = Account.objects.get(pk=pk)
+            code = acc.account_code
+            name = acc.account_name
+            account_dict[code] = name
+        except:
+            pass
+
+
+    # [科目コード, 科目名, 期首残高, 借方発生額, 貸方発生額 , 期末残高] list 作成
+    ## 開始残高の取得
+    beginning_balance_dict = dict()
+    i = BeginningBalance.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            bb = BeginningBalance.objects.get(pk=pk)
+            ac = bb.account_code
+            am = bb.beginning_balance
+            beginning_balance_dict[ac] = am
+        except:
+            pass
+
+    # 借方・貸方発生額の取得と集計
+    trial_balance = dict()
+    i = Journal.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            je = Journal.objects.get(pk=pk)
+            dc = je.je_debit_credit
+            ac = je.je_account
+            ac_name = account_dict[ac]
+            am = je.je_amount
+
+            ## 抽出した仕訳の勘定科目が、まだ trial_balance に出てきていない場合
+            if ac not in trial_balance:
+                if dc == "0":
+                    trial_balance[ac] = [am, 0]
+                else:
+                    trial_balance[ac] = [0, am]
+
+            ## 抽出した仕訳の勘定科目が、 trial_balance にある場合
+            else:
+                if dc == "0":
+                    dev_am = trial_balance[ac][0] + am
+                    cre_am = trial_balance[ac][1]
+                    trial_balance[ac] = [dev_am, cre_am]
+                else:
+                    cre_am = trial_balance[ac][1] + am
+                    dev_am = trial_balance[ac][0]
+                    trial_balance[ac] = [dev_am, cre_am]
+        except:
+            pass
+    
+    # 勘定科目コード順に sort
+    sorted_trial_balance = sorted(trial_balance.items(), key=lambda x:x[0])
+
+    # sorted_trial_balance を for ループしつつ、以下を行う：
+        # 科目名の追加
+        # 期首残高の追加
+        # 期末残高の追加
+    balance_sheet = []
+
+    for code, dc in sorted_trial_balance:
+        bb = beginning_balance_dict[code]
+        # 資産、負債、純資産の科目だけを選択し、期末残高を balance_sheet に追加する
+        if code[0] == "1":
+            balance_sheet.append([code, account_dict[code], bb + dc[0] - dc[1]])
+
+        elif code[0] == ("2" or "3"):
+            balance_sheet.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
+
+        else:
+            pass
+
+    return render(request, "journal/balance_sheet.html", context={"balance_sheet":balance_sheet})
+
+def make_profit_loss_statement(request):
+    # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
+
+    # {勘定科目コード: 勘定科目名} dict 作成
+    account_dict = dict()
+    i = Account.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            acc = Account.objects.get(pk=pk)
+            code = acc.account_code
+            name = acc.account_name
+            account_dict[code] = name
+        except:
+            pass
+
+
+    # [科目コード, 科目名, 期首残高, 借方発生額, 貸方発生額 , 期末残高] list 作成
+    ## 開始残高の取得
+    beginning_balance_dict = dict()
+    i = BeginningBalance.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            bb = BeginningBalance.objects.get(pk=pk)
+            ac = bb.account_code
+            am = bb.beginning_balance
+            beginning_balance_dict[ac] = am
+        except:
+            pass
+
+    # 借方・貸方発生額の取得と集計
+    trial_balance = dict()
+    i = Journal.objects.all().count()
+
+    for pk in range(1, i+1):
+        try:
+            je = Journal.objects.get(pk=pk)
+            dc = je.je_debit_credit
+            ac = je.je_account
+            ac_name = account_dict[ac]
+            am = je.je_amount
+
+            ## 抽出した仕訳の勘定科目が、まだ trial_balance に出てきていない場合
+            if ac not in trial_balance:
+                if dc == "0":
+                    trial_balance[ac] = [am, 0]
+                else:
+                    trial_balance[ac] = [0, am]
+
+            ## 抽出した仕訳の勘定科目が、 trial_balance にある場合
+            else:
+                if dc == "0":
+                    dev_am = trial_balance[ac][0] + am
+                    cre_am = trial_balance[ac][1]
+                    trial_balance[ac] = [dev_am, cre_am]
+                else:
+                    cre_am = trial_balance[ac][1] + am
+                    dev_am = trial_balance[ac][0]
+                    trial_balance[ac] = [dev_am, cre_am]
+        except:
+            pass
+    
+    # 勘定科目コード順に sort
+    sorted_trial_balance = sorted(trial_balance.items(), key=lambda x:x[0])
+
+    # sorted_trial_balance を for ループしつつ、以下を行う：
+        # 科目名の追加
+        # 期首残高の追加
+        # 期末残高の追加
+    profit_loss_statement = []
+
+    for code, dc in sorted_trial_balance:
+        bb = beginning_balance_dict[code]
+        # 資産、負債、純資産の科目だけを選択し、期末残高を balance_sheet に追加する
+        if code[0] == ("5" or "6" or "9") or code[0:1] == ("72" or "82"):
+            profit_loss_statement.append([code, account_dict[code], bb + dc[0] - dc[1]])
+
+        elif code[0] == "4" or code[0:1] == ("71" or "81"):
+            profit_loss_statement.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
+
+        else:
+            pass
+
+    return render(request, "journal/profit_loss_statement.html", context={"profit_loss":profit_loss_statement})
+
 
 class AccountsAutoComplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):

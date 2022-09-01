@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block main %}
+
+<h1>損益計算書</h1>
+
+<div class="container mt-4">
+    <div class="trial-balance">
+        <div class="table">
+            <div class="tr">
+                <div class="td">勘定科目コード</div>
+                <div class="td">勘定科目名</div>
+                <div class="td">期末残高</div>    
+            </div>
+            <!-- 勘定科目ごとにTrialBalanceテーブルから各値を取得して表示する -->
+        
+            {% for pl in profit_loss %}
+            <div class="tr">
+                <div class="td">{{ pl.0 }}</div>
+                <div class="td-left">{{ pl.1 }}</div>
+                <div class="td">{{ pl.2 | intcomma }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

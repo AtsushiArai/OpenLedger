@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+
+{% block main %}
+
+<h1>貸借対照表</h1>
+
+<div class="container mt-4">
+    <div class="trial-balance">
+        <div class="table">
+            <div class="tr">
+                <div class="td">勘定科目コード</div>
+                <div class="td">勘定科目名</div>
+                <div class="td">期末残高</div>    
+            </div>
+            <!-- 勘定科目ごとにTrialBalanceテーブルから各値を取得して表示する -->
+        
+            {% for bs in balance_sheet %}
+            <div class="tr">
+                <div class="td">{{ bs.0 }}</div>
+                <div class="td-left">{{ bs.1 }}</div>
+                <div class="td">{{ bs.2 | intcomma }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
