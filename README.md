@@ -68,3 +68,43 @@ django form に入力した値のPUSHの取得だが、
 <input>タグの name="debit-account" name="credit-account" は無視されている。
 
 借方・貸方金額の一致チェックを javascript で行うことは成功したが、一致している場合にsubmit処理をすることができなかった。 if alert else submit をできるようにする。
+
+## 2022-08-31
+貸借金額の一致チェックは、javscriptを使ってブラウザ側で処理することがどうしてもうまくいかなかった。そのためバックエンドで実行することとした。
+一方で、バックエンドで貸借不一致を検出した場合に元の仕訳入力ページに戻るが、戻った際にプルダウンリストで入力した勘定科目に元々入力していた値をいれることはできなかった。
+プルダウンリストをやめて「入力フォーム＋サジェスチョン機能」に変えようとしたが、サジェスチョン機能をhtmlに落とし込むことができなかった（admin画面で実装することはできた）
+> https://qiita.com/sukobuto/items/2ea0793608c0ca238367
+
+テストのために作ってそのまま残してあるもの
+
+### admin.py
+@admin.register(TestTable)
+class TestAdmin(admin.ModelAdmin):
+    form = ChoiceAccountForm2
+
+### forms.py
+class ChoiceAccountForm2(forms.ModelForm):
+    class Meta:
+        model = TestTable
+        fields = ('__all__')
+        widgets = {
+            'account': autocomplete.ModelSelect2(url='account-autocomplete')
+        }
+
+
+### OSSL > urls.py
+    path('account-autocomplete/',views.AccountsAutoComplete.as_view(), name='account-autocomplete'),
+
+### views.py
+class AccountsAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        qs = Account.objects.all()
+        if self.q:
+            qs = qs.filter()
+
+        return qs
+
+### OSSL > settings.py > INSTALLED_APP
+    'dal',
+    'dal_select2',

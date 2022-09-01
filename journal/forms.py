@@ -1,5 +1,6 @@
+from dal import autocomplete
 from django import forms
-from journal.models import Account
+from journal.models import Account, TestTable
 
 accounts_table = [x for x in Account.objects.values()]
 accounts_list = [("",""),]
@@ -45,4 +46,12 @@ class ChoiceAccountForm(forms.Form):
 #     je_amount = forms.CharField()
 #     je_company = forms.CharField()
 #     je_description = forms.CharField()
-    
+
+
+class ChoiceAccountForm2(forms.ModelForm):
+    class Meta:
+        model = TestTable
+        fields = ('__all__')
+        widgets = {
+            'account': autocomplete.ModelSelect2(url='account-autocomplete')
+        }

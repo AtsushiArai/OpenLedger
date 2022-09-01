@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from journal.models import Journal, Account, SubAccount, Companies, Users, Department, Annual, BeginningBalance
+from journal.forms import ChoiceAccountForm, ChoiceAccountForm2
+from journal.models import Journal, Account, SubAccount, Companies, Users, Department, Annual, BeginningBalance, TestTable
 # Register your models here.
 
 admin.site.register(Journal)
@@ -22,4 +23,7 @@ class BeginningBalanceAdmin(admin.ModelAdmin):
     list_display = ('account_code', 'beginning_balance')
     list_editable = ('beginning_balance',)
 
-    
+
+@admin.register(TestTable)
+class TestAdmin(admin.ModelAdmin):
+    form = ChoiceAccountForm2

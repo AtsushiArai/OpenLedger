@@ -2,9 +2,10 @@
 
 {% block main %}
 
+{{ error_message }}
 
 <div class="container mt-4">
-<form action="/entry/" method="POST"  onsubmit="return checkAmount()">
+<form action="/entry/" method="POST">
     {% csrf_token %}
     <!-- 借方・貸方　共通 -->
     <div class="table">
@@ -16,10 +17,10 @@
                 <th>計上区分</th>
             </tr>
             <tr>
-                <td><input type="text" name="je-number"></td>
-                <td><input type="text" name="annual"></td>
-                <td><input type="text" name="accounting-date"></td>
-                <td><input type="text" name="entry-type"></td>
+                <td><input type="text" name="je-number" value="{{ value.je_number }}"></td>
+                <td><input type="text" name="annual" value="{{ value.annual }}"></td>
+                <td><input type="text" name="accounting-date" value="{{ value.accounting_date }}"></td>
+                <td><input type="text" name="entry-type" value="{{ value.entry_type }}"></td>
             </tr>
         </table>
     </div>
@@ -39,12 +40,12 @@
                 <th>借方取引先</th>
             </tr>
             <tr>
-                <td><input type="hidden" name="debit-account">{{ account }}</td>
-                <td><input type="text" name="debit-sub-account"></td>
-                <td><input type="text" name="debit-consumptiontax"></td>
-                <td><input type="text" name="debit-department"></td>
-                <td><input type="text" name="debit-amount" id="je1-debit"></td>
-                <td><input type="text" name="debit-company"></td>
+                <td><input type="hidden" name="debit-account" value="{{ value.debit_account1 }}">{{ account }}</td>
+                <td><input type="text" name="debit-sub-account" value="{{ value.debit_sub_account1 }}"></td>
+                <td><input type="text" name="debit-consumptiontax" value="{{ value.debit_consumptiontax1 }}"></td>
+                <td><input type="text" name="debit-department" value="{{ value.debit_department1 }}"></td>
+                <td><input type="number" name="debit-amount" id="je1-debit" value="{{ value.debit_amount1 }}"></td>
+                <td><input type="text" name="debit-company" value="{{ value.debit_company1 }}"></td>
                 <input type="hidden" name="debit-credit" value="0">
             </tr>
         </table>
@@ -59,17 +60,17 @@
                 <th>貸方取引先</th>
             </tr>
             <tr>
-                <td><input type="hidden" name="credit-account">{{ account }}</td>
-                <td><input type="text" name="credit-sub-account"></td>
-                <td><input type="text" name="credit-consumptiontax"></td>
-                <td><input type="text" name="credit-department"></td>
-                <td><input type="text" name="credit-amount" id="je1-credit"></td>
-                <td><input type="text" name="credit-company"></td>
+                <td><input type="hidden" name="credit-account" value="{{ value.credit_account1 }}">{{ account }}</td>
+                <td><input type="text" name="credit-sub-account" value="{{ value.credit_sub_account1 }}"></td>
+                <td><input type="text" name="credit-consumptiontax" value="{{ value.credit_consumptiontax1 }}"></td>
+                <td><input type="text" name="credit-department" value="{{ value.credit_department1 }}"></td>
+                <td><input type="number" name="credit-amount" id="je1-credit" value="{{ value.credit_amount1 }}"></td>
+                <td><input type="text" name="credit-company" value="{{ value.credit_company1 }}"></td>
                 <input type="hidden" name="debit-credit" value="1">
             </tr>
         </table>
         <!-- その他 -->
-        摘要：<input type="text" name="description">
+        摘要：<input type="text" name="description" value="{{ value.description1 }}">
     </div>
     <hr>
     <!-- 仕訳：2行目 -->
@@ -87,12 +88,12 @@
                 <th>借方取引先</th>
             </tr>
             <tr>
-                <td><input type="hidden" name="debit-account">{{ account }}</td>
-                <td><input type="text" name="debit-sub-account"></td>
-                <td><input type="text" name="debit-consumptiontax"></td>
-                <td><input type="text" name="debit-department"></td>
-                <td><input type="text" name="debit-amount" id="je2-debit"></td>
-                <td><input type="text" name="debit-company"></td>
+                <td><input type="hidden" name="debit-account" value="{{ value.debit_account2 }}">{{ account }}</td>
+                <td><input type="text" name="debit-sub-account" value="{{ value.debit_sub_account2 }}"></td>
+                <td><input type="text" name="debit-consumptiontax" value="{{ value.debit_consumptiontax2 }}"></td>
+                <td><input type="text" name="debit-department" value="{{ value.debit_department2 }}"></td>
+                <td><input type="number" name="debit-amount" id="je2-debit" value="{{ value.debit_amount2 }}"></td>
+                <td><input type="text" name="debit-company" value="{{ value.debit_company2 }}"></td>
                 <input type="hidden" name="debit-credit" value="0">
             </tr>
         </table>
@@ -107,17 +108,17 @@
                 <th>貸方取引先</th>
             </tr>
             <tr>
-                <td><input type="hidden" name="credit-account">{{ account }}</td>
-                <td><input type="text" name="credit-sub-account"></td>
-                <td><input type="text" name="credit-consumptiontax"></td>
-                <td><input type="text" name="credit-department"></td>
-                <td><input type="text" name="credit-amount" id="je2-credit"></td>
-                <td><input type="text" name="credit-company"></td>
+                <td><input type="hidden" name="credit-account" value="{{ value.credit_account2 }}">{{ account }}</td>
+                <td><input type="text" name="credit-sub-account" value="{{ value.credit_sub_account2 }}"></td>
+                <td><input type="text" name="credit-consumptiontax" value="{{ value.credit_consumptiontax2 }}"></td>
+                <td><input type="text" name="credit-department" value="{{ value.credit_department2 }}"></td>
+                <td><input type="number" name="credit-amount" id="je2-credit" value="{{ value.credit_amount2 }}"></td>
+                <td><input type="text" name="credit-company" value="{{ value.credit_company2 }}"></td>
                 <input type="hidden" name="debit-credit" value="1">
             </tr>
         </table>
         <!-- その他 -->
-        摘要：<input type="text" name="description">
+        摘要：<input type="text" name="description" value="{{ value.description2 }}">
         <br>
     {% endfor %}
     </div>
@@ -125,7 +126,7 @@
     <input type="hidden" name="debit-account" value="">
     <input type="hidden" name="credit-account" value="">
 
-    <button type="button" id="submit" class="btn btn-primary">仕訳の登録</button>
+    <button type="submit" id="btn-submit" class="btn btn-primary">仕訳の登録</button>
 </form>
 </div>
 

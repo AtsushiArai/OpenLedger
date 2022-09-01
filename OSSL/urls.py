@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from journal import views
 from journal.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('entry/', include('journal.urls')),
+    path('account-autocomplete/',views.AccountsAutoComplete.as_view(), name='account-autocomplete'),
 ]

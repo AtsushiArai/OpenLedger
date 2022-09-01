@@ -1,3 +1,5 @@
+from dal import autocomplete
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
@@ -25,7 +27,9 @@ def credit_side(request):
 
 def entry(request, *args, **kwargs):
     context = {}
-    form = ChoiceAccountForm()
+    form = ChoiceAccountForm(initial={
+        "debit_account": 11101
+    })
     context['accounts'] = form
 
     if request.method == "GET":
@@ -64,63 +68,112 @@ def entry(request, *args, **kwargs):
         # その他
         posted_descreption = request.POST.getlist('description')
 
-        for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p in zip(
-            posted_je_row_number,           #a
-            posted_debit_account,           #b
-            posted_debit_sub_account,       #c
-            posted_debit_consumptiontax,    #d
-            posted_debit_department,        #e
-            posted_debit_amount,            #f
-            posted_debit_company,           #g
-            posted_credit_account,          #h
-            posted_credit_sub_account,      #i
-            posted_credit_consumptiontax,   #j
-            posted_credit_department,       #k
-            posted_credit_amount,           #l
-            posted_credit_company,          #m
-            posted_descreption,             #n
-            posted_debit_side,              #o
-            posted_credit_side              #p
-            ):
+        sum_posted_debit_amount = 0
+        sum_posted_credit_amount = 0
 
-            if b != "":
-                journal_entry_debit = Journal(
-                    je_number=posted_je_number,
-                    je_row_number = a,
-                    je_annual = posted_annual,
-                    je_accounting_date = posted_accounting_date,
-                    je_entry_date = posted_entry_date,
-                    je_entry_type = posted_entry_type,
-                    je_account = b,
-                    je_subaccount = c,
-                    je_consumptiontax = d,
-                    je_department = e,
-                    je_amount = int(f),
-                    je_company = g,
-                    je_description = n,
-                    je_debit_credit = o,
-                )
-                journal_entry_debit.save()
-            
-            if h != "":
-                journal_entry_credit = Journal(
-                    je_number=posted_je_number,
-                    je_row_number = a,
-                    je_annual = posted_annual,
-                    je_accounting_date = str(posted_accounting_date),
-                    je_entry_date = str(posted_entry_date),
-                    je_entry_type = posted_entry_type,
-                    je_account = h,
-                    je_subaccount = i,
-                    je_consumptiontax = j,
-                    je_department = k,
-                    je_amount = int(l),
-                    je_company = m,
-                    je_description = n,
-                    je_debit_credit = p,
-                )
+        for x in posted_debit_amount:
+            sum_posted_debit_amount += int(x)
 
-                journal_entry_credit.save()
+        for y in posted_credit_amount:
+            sum_posted_credit_amount += int(y)
+
+        if sum_posted_debit_amount != sum_posted_credit_amount:
+            error_message = "借方・貸方の金額合計が一致しません。"
+            context['error_message'] = error_message
+            context['value'] = {
+                "je_number":posted_je_number,
+                "je_row_number": posted_je_row_number,
+                "annual": posted_annual,
+                "accounting_date": posted_accounting_date,
+                "entry_type": posted_entry_type,
+                "debit_account1": posted_debit_account[0],
+                "debit_sub_account1": posted_debit_sub_account[0],
+                "debit_consumptiontax1": posted_debit_consumptiontax[0],
+                "debit_department1": posted_debit_department[0],
+                "debit_amount1": posted_debit_amount[0],
+                "debit_company1": posted_debit_company[0],
+                "debit_account2": posted_debit_account[1],
+                "debit_sub_account2": posted_debit_sub_account[1],
+                "debit_consumptiontax2": posted_debit_consumptiontax[1],
+                "debit_department2": posted_debit_department[1],
+                "debit_amount2": posted_debit_amount[1],
+                "debit_company2": posted_debit_company[1],
+                "credit_account1": posted_credit_account[0],
+                "credit_sub_account1": posted_credit_sub_account[0],
+                "credit_consumptiontax1": posted_credit_consumptiontax[0],
+                "credit_department1": posted_credit_department[0],
+                "credit_amount1": posted_credit_amount[0],
+                "credit_company1": posted_credit_company[0],
+                "credit_account2": posted_credit_account[1],
+                "credit_sub_account2": posted_credit_sub_account[1],
+                "credit_consumptiontax2": posted_credit_consumptiontax[1],
+                "credit_department2": posted_credit_department[1],
+                "credit_amount2": posted_credit_amount[1],
+                "credit_company2": posted_credit_company[1],
+                "description1": posted_descreption[0],
+                "description2": posted_descreption[1],
+            }
+            return render(request, "journal/entry.html", context)
+
+        else:
+
+            for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p in zip(
+                posted_je_row_number,           #a
+                posted_debit_account,           #b
+                posted_debit_sub_account,       #c
+                posted_debit_consumptiontax,    #d
+                posted_debit_department,        #e
+                posted_debit_amount,            #f
+                posted_debit_company,           #g
+                posted_credit_account,          #h
+                posted_credit_sub_account,      #i
+                posted_credit_consumptiontax,   #j
+                posted_credit_department,       #k
+                posted_credit_amount,           #l
+                posted_credit_company,          #m
+                posted_descreption,             #n
+                posted_debit_side,              #o
+                posted_credit_side              #p
+                ):
+
+                if b != "":
+                    journal_entry_debit = Journal(
+                        je_number=posted_je_number,
+                        je_row_number = a,
+                        je_annual = posted_annual,
+                        je_accounting_date = posted_accounting_date,
+                        je_entry_date = posted_entry_date,
+                        je_entry_type = posted_entry_type,
+                        je_account = b,
+                        je_subaccount = c,
+                        je_consumptiontax = d,
+                        je_department = e,
+                        je_amount = int(f),
+                        je_company = g,
+                        je_description = n,
+                        je_debit_credit = o,
+                    )
+                    journal_entry_debit.save()
+                
+                if h != "":
+                    journal_entry_credit = Journal(
+                        je_number=posted_je_number,
+                        je_row_number = a,
+                        je_annual = posted_annual,
+                        je_accounting_date = str(posted_accounting_date),
+                        je_entry_date = str(posted_entry_date),
+                        je_entry_type = posted_entry_type,
+                        je_account = h,
+                        je_subaccount = i,
+                        je_consumptiontax = j,
+                        je_department = k,
+                        je_amount = int(l),
+                        je_company = m,
+                        je_description = n,
+                        je_debit_credit = p,
+                    )
+
+                    journal_entry_credit.save()
 
         return render(request, "journal/entry.html", context)
 
@@ -229,3 +282,12 @@ def make_trial_balance(request):
 
     # htmlに "trial_balance" として渡す。
     return render(request, "journal/trial_balance.html", context={"trial_balance":fixed_trial_balance})
+
+class AccountsAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+
+        qs = Account.objects.all()
+        if self.q:
+            qs = qs.filter()
+
+        return qs

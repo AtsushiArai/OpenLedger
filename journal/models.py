@@ -163,3 +163,5 @@ class JournalType(models.Model):
     def __str__(self):
         return str(self.journal_type_code) + " " + self.journal_type_name
 
+class TestTable(models.Model):
+    account = models.ForeignKey(Account, related_name='profiles', on_delete=models.DO_NOTHING, verbose_name="科目")
