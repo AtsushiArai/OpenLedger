@@ -182,11 +182,13 @@ def make_trial_balance(request):
 
     # {勘定科目コード: 勘定科目名} dict 作成
     account_dict = dict()
-    i = Account.objects.all().count()
+    # i = Account.objects.all().count()
+    account_code_all = Account.objects.values_list('account_code', flat=True)
 
-    for pk in range(1, i+1):
+    # for pk in range(1, i+1):
+    for ac in account_code_all:
         try:
-            acc = Account.objects.get(pk=pk)
+            acc = Account.objects.get(account_code=ac)
             code = acc.account_code
             name = acc.account_name
             account_dict[code] = name
@@ -210,9 +212,9 @@ def make_trial_balance(request):
 
     # 借方・貸方発生額の取得と集計
     trial_balance = dict()
-    i = Journal.objects.all().count()
+    i = Journal.objects.values_list('id', flat=True)
 
-    for pk in range(1, i+1):
+    for pk in i:
         try:
             je = Journal.objects.get(pk=pk)
             dc = je.je_debit_credit
@@ -250,12 +252,18 @@ def make_trial_balance(request):
     fixed_trial_balance = []
 
     for code, dc in sorted_trial_balance:
-        bb = beginning_balance_dict[code]
+        code = str(code)
+        
+        try:
+            bb = beginning_balance_dict[code]
+        except:
+            bb = 0
+
         if code[0] == ("1" or "5" or "6" or "9") or code[0:1] == ("72" or "82"):
-            fixed_trial_balance.append([code, account_dict[code], bb, dc[0], dc[1], bb + dc[0] - dc[1]])
+            fixed_trial_balance.append([code, account_dict[int(code)], bb, dc[0], dc[1], bb + dc[0] - dc[1]])
 
         else:
-            fixed_trial_balance.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
+            fixed_trial_balance.append([code, account_dict[int(code)], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
 
 
     return render(request, "journal/trial_balance.html", context={"trial_balance":fixed_trial_balance})
@@ -266,11 +274,13 @@ def make_balance_sheet(request):
 
     # {勘定科目コード: 勘定科目名} dict 作成
     account_dict = dict()
-    i = Account.objects.all().count()
+    # i = Account.objects.all().count()
+    account_code_all = Account.objects.values_list('account_code', flat=True)
 
-    for pk in range(1, i+1):
+    # for pk in range(1, i+1):
+    for ac in account_code_all:
         try:
-            acc = Account.objects.get(pk=pk)
+            acc = Account.objects.get(account_code=ac)
             code = acc.account_code
             name = acc.account_name
             account_dict[code] = name
@@ -294,9 +304,9 @@ def make_balance_sheet(request):
 
     # 借方・貸方発生額の取得と集計
     trial_balance = dict()
-    i = Journal.objects.all().count()
+    i = Journal.objects.values_list('id', flat=True)
 
-    for pk in range(1, i+1):
+    for pk in i:
         try:
             je = Journal.objects.get(pk=pk)
             dc = je.je_debit_credit
@@ -334,13 +344,19 @@ def make_balance_sheet(request):
     balance_sheet = []
 
     for code, dc in sorted_trial_balance:
-        bb = beginning_balance_dict[code]
+        code = str(code)
+
+        try:
+            bb = beginning_balance_dict[code]
+        except:
+            bb = 0
+
         # 資産、負債、純資産の科目だけを選択し、期末残高を balance_sheet に追加する
         if code[0] == "1":
-            balance_sheet.append([code, account_dict[code], bb + dc[0] - dc[1]])
+            balance_sheet.append([code, account_dict[int(code)], bb + dc[0] - dc[1]])
 
         elif code[0] == ("2" or "3"):
-            balance_sheet.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
+            balance_sheet.append([code, account_dict[int(code)], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
 
         else:
             pass
@@ -352,11 +368,13 @@ def make_profit_loss_statement(request):
 
     # {勘定科目コード: 勘定科目名} dict 作成
     account_dict = dict()
-    i = Account.objects.all().count()
+    # i = Account.objects.all().count()
+    account_code_all = Account.objects.values_list('account_code', flat=True)
 
-    for pk in range(1, i+1):
+    # for pk in range(1, i+1):
+    for ac in account_code_all:
         try:
-            acc = Account.objects.get(pk=pk)
+            acc = Account.objects.get(account_code=ac)
             code = acc.account_code
             name = acc.account_name
             account_dict[code] = name
@@ -380,9 +398,9 @@ def make_profit_loss_statement(request):
 
     # 借方・貸方発生額の取得と集計
     trial_balance = dict()
-    i = Journal.objects.all().count()
+    i = Journal.objects.values_list('id', flat=True)
 
-    for pk in range(1, i+1):
+    for pk in i:
         try:
             je = Journal.objects.get(pk=pk)
             dc = je.je_debit_credit
@@ -420,13 +438,18 @@ def make_profit_loss_statement(request):
     profit_loss_statement = []
 
     for code, dc in sorted_trial_balance:
-        bb = beginning_balance_dict[code]
-        # 資産、負債、純資産の科目だけを選択し、期末残高を balance_sheet に追加する
+        code = str(code)
+        try:
+            bb = beginning_balance_dict[code]
+        except:
+            bb = 0
+
+        # 損益の科目だけを選択し、期末残高を balance_sheet に追加する
         if code[0] == ("5" or "6" or "9") or code[0:1] == ("72" or "82"):
-            profit_loss_statement.append([code, account_dict[code], bb + dc[0] - dc[1]])
+            profit_loss_statement.append([code, account_dict[int(code)], bb + dc[0] - dc[1]])
 
         elif code[0] == "4" or code[0:1] == ("71" or "81"):
-            profit_loss_statement.append([code, account_dict[code], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
+            profit_loss_statement.append([code, account_dict[int(code)], bb, dc[0], dc[1], bb - dc[0] + dc[1]])
 
         else:
             pass
