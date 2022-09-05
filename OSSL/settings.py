@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'journal.apps.JournalConfig',
     'django_bootstrap5',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,8 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # 金額をカンマ区切りにするための設定
 # https://opendata-web.site/blog/entry/2/
 NUMBER_GROUPING = 3
+
+# Login / Logout
+LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

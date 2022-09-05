@@ -24,4 +24,5 @@ urlpatterns = [
     path('', index, name='index'),
     path('entry/', include('journal.urls')),
     path('account-autocomplete/',views.AccountsAutoComplete.as_view(), name='account-autocomplete'),
+    path('users/', include("users.urls")),
 ]

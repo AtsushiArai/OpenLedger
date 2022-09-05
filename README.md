@@ -121,3 +121,6 @@ views.py make_trial_balance関数を修正。
 * model定義で勘定科目コードが数値となったために、参照エラーとなって何も勘定科目が表示されなくなっていたので修正した。
 make_balance_sheet, make_profit_loss_statement も同様に修正。
 * TB、BS、PLは、Accountテーブルの「件数」を取得し、pk = range(1, 件数) みたいなイメージでデータを取得していたが、これだとAccountの追加・削除によってpk ( id ) が連番でなくなることで、網羅的に表示することができなくなってしまう。そのため純粋に account_code を抽出するように変更した。
+
+## 2022-09-05
+ユーザー登録機能を追加した。
