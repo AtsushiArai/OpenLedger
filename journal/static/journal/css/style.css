@@ -1,20 +1,47 @@
+.journal-entry-form {
+    max-width: 98%;
+    margin: auto;
+}
+
+.je-header {
+    max-width: 50%;
+}
+
+.je-header-content {
+    text-align: left;
+    text-indent: 1rem;
+}
+
+.je-container{
+    display: flex;
+}
+
 .table {
     display: table;
 }
 
-.tr {
+.table-left {
+    display: table;
+    border: 1px solid black;
+    border-left: 0px none;
+    border-bottom: 0px none;
+}
+
+.table-right {
+    display: table;
+    border: 1px solid black;
+    border-right: 0px none;
+    border-bottom: 0px none;
+}
+
+tr {
     display: table-row;
 }
 
-.th {
-    display: table-header-group;
-    text-align: right;
-}
-
-.td {
+td {
     display: table-cell;
     text-align: right;
-    width: 15%;
+    width: 10%;
 }
 
 .td-left {
@@ -22,9 +49,21 @@
     text-indent: 2rem;
 }
 
-.td input {
+td input {
     border-radius: 3px;
     border: 2px solid #ddd;
+    width: 90%;
+}
+
+.rep-debit-credit {
+    font-size: larger;
+    font-weight: bold;
+}
+
+tbody {
+    border-style: none;
+    border-width: 0px;
+    border-color: white;
 }
 
 .base {

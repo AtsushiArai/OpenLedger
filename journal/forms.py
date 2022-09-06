@@ -28,7 +28,7 @@ for d in accounts_table:
 class ChoiceAccountForm(forms.Form):
     account = forms.fields.ChoiceField(
         choices=accounts_list,
-        required=True,
+        required=False,
         widget=forms.widgets.Select,
     )
 

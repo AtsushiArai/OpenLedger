@@ -1,0 +1,33 @@
+{% load static %}
+{% load django_bootstrap5 %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OpenSourceLedger</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="{% static 'journal/js/script.js' %}"></script>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <link rel="stylesheet" href="{% static 'journal/css/style.css' %}">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand flex-md-row mavbar-dark bg-dark">
+            <div class="container justify-content-between">
+                <a href="/" class="navbar-brand">OSSL</a>
+                <ul class="navbar-nav mr-md-2">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">ログアウト</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">ログイン</a></li>
+                    <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">ユーザー登録</a></li>
+                    {% endif %}
+                </ul>
+            </div>            
+        </nav>
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+    </body>
+</html>
