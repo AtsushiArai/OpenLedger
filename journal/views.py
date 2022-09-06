@@ -1,5 +1,6 @@
 from dal import autocomplete
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
@@ -18,13 +19,15 @@ def test(request):
 def index(request):
     return render(request, "journal/index.html")
 
+@login_required
 def debit_side(request):
     return render(request, "journal/debit_side.html")
 
+@login_required
 def credit_side(request):
     return render(request, "journal/credit_side.html")
 
-
+@login_required
 def entry(request, *args, **kwargs):
     context = {}
     form = ChoiceAccountForm(initial={
@@ -177,6 +180,7 @@ def entry(request, *args, **kwargs):
 
         return render(request, "journal/entry.html", context)
 
+@login_required
 def make_trial_balance(request):
     # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
 
@@ -268,7 +272,7 @@ def make_trial_balance(request):
 
     return render(request, "journal/trial_balance.html", context={"trial_balance":fixed_trial_balance})
 
-
+@login_required
 def make_balance_sheet(request):
     # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
 
@@ -363,6 +367,7 @@ def make_balance_sheet(request):
 
     return render(request, "journal/balance_sheet.html", context={"balance_sheet":balance_sheet})
 
+@login_required
 def make_profit_loss_statement(request):
     # 仕訳テーブルから勘定科目ごとの借方・貸方発生額の集計を行う。
 
