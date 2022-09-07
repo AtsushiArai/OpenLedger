@@ -80,11 +80,6 @@ def test(request):
         # 貸方仕訳で金額が０でないものをカウント
         count_credit_amount = (sum(i != "" for i in posted_credit_amount))
 
-        print("debit account:", count_debit_account)
-        print("debit amount:", count_debit_amount)
-        print("credit account:", count_credit_account)
-        print("credit amount:", count_credit_amount)
-
         # ERROR CHECK 
         # ERRORのときに入力された値を返す context を準備しておく。
         context['value'] = {
@@ -237,6 +232,13 @@ def test(request):
                     )
 
                     journal_entry_credit.save()
+
+        # contextのリセット（これをしておかないと前の入力値が残ってしまう）
+        context = {}
+        form = ChoiceAccountForm(initial={
+            "debit_account": 11101
+        })
+        context['accounts'] = form
 
         return render(request, "journal/test2.html", context)
 

@@ -10,23 +10,23 @@
     <div class="trial-balance">
         <div class="table">
             <div class="tr">
-                <div class="td">勘定科目コード</div>
-                <div class="td">勘定科目名</div>
-                <div class="td">期首残高</div>
-                <div class="td">借方</div>
-                <div class="td">貸方</div>
-                <div class="td">期末残高</div>    
+                <div class="td td-header td-width-10">勘定科目コード</div>
+                <div class="td td-header td-width-20">勘定科目名</div>
+                <div class="td td-header td-width-10">期首残高</div>
+                <div class="td td-header td-width-10">借方</div>
+                <div class="td td-header td-width-10">貸方</div>
+                <div class="td td-header td-width-10">期末残高</div>    
             </div>
             <!-- 勘定科目ごとにTrialBalanceテーブルから各値を取得して表示する -->
         
             {% for tb in trial_balance %}
             <div class="tr">
-                <div class="td">{{ tb.0 }}</div>
+                <div class="td td-data-indent">{{ tb.0 }}</div>
                 <div class="td-left">{{ tb.1 }}</div>
-                <div class="td">{{ tb.2 | intcomma }}</div>
-                <div class="td">{{ tb.3 | intcomma }}</div>
-                <div class="td">{{ tb.4 | intcomma }}</div>
-                <div class="td">{{ tb.5 | intcomma }}</div>
+                <div class="td td-data-indent">{{ tb.2 | intcomma }}</div>
+                <div class="td td-data-indent">{{ tb.3 | intcomma }}</div>
+                <div class="td td-data-indent">{{ tb.4 | intcomma }}</div>
+                <div class="td td-data-indent">{{ tb.5 | intcomma }}</div>
             </div>
             {% endfor %}
         </div>

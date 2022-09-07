@@ -4,6 +4,24 @@
 <div class="welcome">
     <h1 class="title">オープンソースの会計システム</h1>
     <p class="subtitle">サブタイトルを描く</p>
+
+    {% if user.is_authenticated %}
     <a href="{% url 'entry' %}" class="btn btn-primary">仕訳入力に進む</a>
+
+    <p>最近入力された仕訳</p>
+
+
+
+    <p>合計残高試算表のプレビュー</p>
+    <iframe src="{% url 'trial_balance' %}" frameborder="0" width="80%" height="100%"></iframe>
+
+
+
+
+    {% else %}
+    <p><a href="{% url 'login' %}">ログイン</a>をしてください。</p>
+    <p>ユーザー登録がまだの場合には<a href="{% url 'signup' %}">ユーザー登録</a>をしてください。</p>
+
+    {% endif %}
 </div>
 {% endblock %}
