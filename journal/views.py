@@ -244,7 +244,9 @@ def test(request):
 
 
 def index(request):
-    return render(request, "journal/index.html")
+    journal_entry = Journal.objects.all().order_by('je_number')[:5]
+    context = {"journal_entry": journal_entry}
+    return render(request, "journal/index.html", context)
 
 @login_required
 def debit_side(request):

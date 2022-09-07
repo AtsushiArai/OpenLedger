@@ -9,8 +9,42 @@
     <a href="{% url 'entry' %}" class="btn btn-primary">仕訳入力に進む</a>
 
     <p>最近入力された仕訳</p>
+        {% if journal_entry %}
+        <div class="journal-entry-top">
+            <div class="table">
+                <div class="tr">
+                    <div class="td">仕訳番号</div>
+                    <div class="td">仕訳行番号</div>
+                    <div class="td">計上年月日</div>
+                    <div class="td">貸借区分</div>
+                    <div class="td">勘定科目コード</div>
+                    <div class="td">計上部門コード</div>
+                    <div class="td">金額</div>
+                    <div class="td" td-width-5>取引先コード</div>
+                    <div class="td">摘要</div>
+                </div>
+                {% for je in journal_entry %}
+                <div class="tr">
+                    <div class="td">{{ je.je_number }}</div>
+                    <div class="td">{{ je.je_row_number }}</div>
+                    <div class="td">{{ je.je_accounting_date }}</div>
+                    <div class="td">{{ je.je_debit_credit }}</div>
+                    <div class="td">{{ je.je_account }}</div>
+                    <div class="td">{{ je.je_department }}</div>
+                    <div class="td">{{ je.je_amount }}</div>
+                    <div class="td">{{ je.je_company }}</div>
+                    <div class="td">{{ je.je_description }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+            
 
 
+        {% else %}
+        <p>まだ仕訳入力は行われていません。</p>
+
+        {% endif %}
 
     <p>合計残高試算表のプレビュー</p>
     <iframe src="{% url 'trial_balance' %}" frameborder="0" width="80%" height="100%"></iframe>

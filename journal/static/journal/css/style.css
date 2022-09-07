@@ -44,6 +44,22 @@ td {
     width: 10%;
 }
 
+.journal-entry-top .table .tr {
+    display: table-row;
+}
+
+.journal-entry-top .table .tr .td {
+    display: table-cell;
+    text-align: right;
+    width: 10%;
+    border: 0.5px solid gray;
+    border-top: 0px none;
+    border-bottom: 0px none;
+    border-right: 0px none;
+}
+
+
+
 .trial-balance .table .tr {
     display: table-row;
 }
