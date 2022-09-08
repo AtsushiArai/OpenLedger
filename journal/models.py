@@ -3,42 +3,6 @@ from django.db import models
 
 # Create your models here.
 
-# 仕訳テーブル
-class Journal(models.Model):
-    # 仕訳番号（主キー）
-    je_number = models.IntegerField('仕訳番号')
-    # 仕訳行番号
-    je_row_number = models.IntegerField('仕訳行番号')
-    # 年度（コード番号を保持）
-    je_annual = models.IntegerField('年度コード')
-    # 計上年月日
-    je_accounting_date = models.DateTimeField('計上年月日',)
-    # 入力年月日（自動入力）
-    je_entry_date = models.DateTimeField('入力年月日', auto_now_add=True)
-    # 計上区分（コード番号を保持）
-    je_entry_type = models.IntegerField('計上区分')
-    # 貸借区分（コード番号を保持）
-    je_debit_credit = models.IntegerField('貸借区分')
-    # 勘定科目（コード番号を保持）
-    je_account = models.IntegerField('勘定科目コード')
-    # 補助科目（コード番号を保持）
-    je_subaccount = models.IntegerField('補助科目コード', blank=True)
-    # 消費税区分（コード番号を保持）
-    je_consumptiontax = models.IntegerField('消費税区分')
-    # 計上部門（コード番号を保持）
-    je_department = models.IntegerField('計上部門コード', blank=True)
-    # 金額
-    je_amount = models.IntegerField('金額')
-    # 取引先名（コード番号を保持）
-    je_company = models.IntegerField('取引先コード', blank=True)
-    # 摘要
-    je_description = models.CharField('摘要', max_length=100, blank=True)
-
-    def __str__(self):
-        return str(self.je_number)
-
-
-
 # 勘定科目テーブル
 class Account(models.Model):
     # 勘定科目CD（5ケタ）
@@ -163,5 +127,40 @@ class JournalType(models.Model):
     def __str__(self):
         return str(self.journal_type_code) + " " + self.journal_type_name
 
+# 仕訳テーブル
+class Journal(models.Model):
+    # 仕訳番号（主キー）
+    je_number = models.IntegerField('仕訳番号')
+    # 仕訳行番号
+    je_row_number = models.IntegerField('仕訳行番号')
+    # 年度（コード番号を保持）
+    je_annual = models.IntegerField('年度コード')
+    # 計上年月日
+    je_accounting_date = models.DateTimeField('計上年月日',)
+    # 入力年月日（自動入力）
+    je_entry_date = models.DateTimeField('入力年月日', auto_now_add=True)
+    # 計上区分（コード番号を保持）
+    je_entry_type = models.IntegerField('計上区分')
+    # 貸借区分（コード番号を保持）
+    je_debit_credit = models.IntegerField('貸借区分')
+    # 勘定科目（コード番号を保持）
+    je_account = models.IntegerField('勘定科目コード')
+    # 補助科目（コード番号を保持）
+    je_subaccount = models.IntegerField('補助科目コード', blank=True)
+    # 消費税区分（コード番号を保持）
+    je_consumptiontax = models.IntegerField('消費税区分')
+    # 計上部門（コード番号を保持）
+    je_department = models.IntegerField('計上部門コード', blank=True)
+    # 金額
+    je_amount = models.IntegerField('金額')
+    # 取引先名（コード番号を保持）
+    je_company = models.IntegerField('取引先コード', blank=True)
+    # 摘要
+    je_description = models.CharField('摘要', max_length=100, blank=True)
+
+    def __str__(self):
+        return str(self.je_number)
+
+# ##################  TEST  #######################
 class TestTable(models.Model):
     account = models.ForeignKey(Account, related_name='profiles', on_delete=models.DO_NOTHING, verbose_name="科目")

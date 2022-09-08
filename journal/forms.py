@@ -8,7 +8,6 @@ for d in accounts_table:
     accounts_list.append((str(d["account_code"]),str(d["account_code"])+" "+d["account_name"]))
 
 
-# """ 
 # MEMO1:accounts_table の中身
 #     accounts_table = [
 #         {"id":1, "account_code": "11102", "account_name":"小口現金"},
@@ -18,13 +17,13 @@ for d in accounts_table:
 
 # MEMO2:
 # ChoiceField の choices に渡す値は、(some1, some2) となっていないとダメっぽい。
-
+# 
 # error -> accounts_list = [code+name, code+name, .....]
-
+# 
 # success -> accounts_list = [(code, code+name), (code, code+name),....]
+# 　　* code の値が POST される。
 
 
-# """
 class ChoiceAccountForm(forms.Form):
     account = forms.fields.ChoiceField(
         choices=accounts_list,

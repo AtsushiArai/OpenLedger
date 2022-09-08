@@ -60,7 +60,7 @@ def entry(request, *args, **kwargs):
         posted_entry_type = str(request.POST.get('entry-type'))
 
         # 借方
-        posted_debit_account = request.POST.getlist('account')[0:5]                # プルダウンリストで選択された値が "account" として借方・貸方とも渡される。リストにまとめられたうち、indexの偶数番目が借方、奇数番目が貸方になる。 
+        posted_debit_account = request.POST.getlist('account')[0:5]                # プルダウンリストで選択された値が "account" として借方・貸方とも渡される。リストにまとめられたうち、indexの前半分が借方、後ろ半分が貸方になる。 
         posted_debit_sub_account = request.POST.getlist('debit-sub-account')
         posted_debit_consumptiontax = request.POST.getlist('debit-consumptiontax')
         posted_debit_department = request.POST.getlist('debit-department')
