@@ -51,7 +51,7 @@ def test(request):
         posted_credit_side = request.POST.getlist('debit-credit')[5:10]
 
         # その他
-        posted_descreption = request.POST.getlist('description')
+        posted_descreption = request.POST.get('description')
 
         sum_posted_debit_amount = 0
         sum_posted_credit_amount = 0
@@ -152,7 +152,7 @@ def test(request):
             "credit_amount5": posted_credit_amount[4],
             "credit_company5": posted_credit_company[4],
 
-            "description1": posted_descreption[0],
+            "description1": posted_descreption,
         }
 
         # ERROR:貸借金額不一致
@@ -244,8 +244,18 @@ def test(request):
 
 
 def index(request):
-    journal_entry = Journal.objects.all().order_by('je_number')[:5]
-    context = {"journal_entry": journal_entry}
+    if request.method == "GET":
+        context = {}
+        journal_entry = Journal.objects.values('je_number')
+        je_no_set = set()
+
+        for x in journal_entry:
+            for k, v in x.items():
+                je_no_set.add(v)
+
+        je_no_set_sorted = sorted(list(je_no_set), reverse=True)[:1]
+        journal_entry = Journal.objects.filter(je_number__in=je_no_set_sorted)
+        context['journal_entry'] = journal_entry
     return render(request, "journal/index.html", context)
 
 @login_required
