@@ -22,17 +22,17 @@ class Journal(models.Model):
     # 勘定科目（コード番号を保持）
     je_account = models.IntegerField('勘定科目コード')
     # 補助科目（コード番号を保持）
-    je_subaccount = models.IntegerField('補助科目コード')
+    je_subaccount = models.IntegerField('補助科目コード', blank=True)
     # 消費税区分（コード番号を保持）
     je_consumptiontax = models.IntegerField('消費税区分')
     # 計上部門（コード番号を保持）
-    je_department = models.IntegerField('計上部門コード')
+    je_department = models.IntegerField('計上部門コード', blank=True)
     # 金額
     je_amount = models.IntegerField('金額')
     # 取引先名（コード番号を保持）
-    je_company = models.IntegerField('取引先コード')
+    je_company = models.IntegerField('取引先コード', blank=True)
     # 摘要
-    je_description = models.CharField('摘要', max_length=100)
+    je_description = models.CharField('摘要', max_length=100, blank=True)
 
     def __str__(self):
         return str(self.je_number)
